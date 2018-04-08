@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Final_Project</string>
+
+    <string name="mainActivity_PatientIntakeForm">Patient Intake Form</string>
+    <string name="intakeForm_Title">Patient Intake Form</string>
+    <string name="intakeForm_GeneralDescription">
+        Please choose one of the three options above: \n\n
+        Each one will take you to an individual form to help you register either a doctor, a dentist, or an Optometrist.</string>
+    <string name="intakeForm_ThreeChoice">Please choose one of the three followings:</string>
+    <string name="intakeForm_RegisterForDoctor">Register For A Doctor</string>
+    <string name="intakeForm_RegisterForDentist">Register For A Dentist</string>
+    <string name="intakeForm_RegisterForOptometrist">Register For Optometrist</string>
+    <string name="intakeFormTitle">Patient Intake Form</string>
+    <string name="intakeForm_FirstName">First Name</string>
+    <string name="intakeForm_LastName">Last Name</string>
+    <string name="intakeForm_Address">Address</string>
+    <string name="intakeForm_PhoneNumber">Last Name</string>
+    <string name="intakeForm_HealthCard">Health Chard No.</string>
+
+    <string name="intakeForm_GoToMovieInformation">To Movie Information</string>
+    <string name="intakeForm_GoToBusRoutineApp">To Bus Routine App</string>
+    <string name="intakeForm_GoToQuizCreater">To Quiz Creater</string>
+    <string name="intakeForm_AboutZeyangHu">About Me</string>
 </resources>
