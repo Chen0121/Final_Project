@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity ;
 import android.os.Bundle ;
 import android.view.View ;
 import android.view.ViewGroup ;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button ;
 import android.widget.EditText ;
@@ -242,7 +241,7 @@ public class CreateQuiz extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View result;
             TextView Txt;
-            result = CreateQuiz.this.getLayoutInflater().inflate(R.layout.activity_multiple_fragment, null);
+            result = CreateQuiz.this.getLayoutInflater().inflate(R.layout.multiple_fragment, null);
             Txt = result.findViewById(R.id.question_txt);
             Txt.setText(getItem(position).getQuestion());
             return result;
