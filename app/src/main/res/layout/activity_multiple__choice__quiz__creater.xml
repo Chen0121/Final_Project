@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chen.final_project.Multiple_Choice_Quiz_Creater">
+    tools:context="com.example.chen.finalproject.Quiz_Creater"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/one"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignTop="@+id/btn_import"
+        android:layout_marginEnd="14dp"
+        android:layout_toStartOf="@+id/btn_import"
+        android:src="@drawable/one" />
+
+    <Button
+        android:id="@+id/btn_import"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/btn_create"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="49dp"
+        android:layout_marginEnd="83dp"
+        android:text="import questions" />
+
+    <ImageButton
+        android:id="@+id/two"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignStart="@+id/one"
+        android:layout_below="@+id/btn_import"
+        android:src="@drawable/two" />
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/btn_statistic"
+        android:layout_alignStart="@+id/btn_statistic"
+        android:layout_marginBottom="45dp"
+        android:text="create a quiz" />
+
+    <ImageButton
+        android:id="@+id/three"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignStart="@+id/four"
+        android:layout_below="@+id/btn_create"
+        android:src="@drawable/three" />
+
+    <Button
+        android:id="@+id/btn_statistic"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_above="@+id/btn_quit"
+        android:layout_alignStart="@+id/btn_quit"
+        android:layout_marginBottom="34dp"
+        android:text="get statistics" />
+
+    <ImageButton
+        android:id="@+id/four"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_alignStart="@+id/one"
+        android:layout_below="@+id/btn_statistic"
+        android:src="@drawable/four" />
+
+    <Button
+        android:id="@+id/btn_quit"
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_import"
+        android:layout_marginBottom="30dp"
+        android:text="Quit" />
+
+</RelativeLayout>

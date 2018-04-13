@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/option1"
+        android:title="Choice 1"
+        android:icon="@drawable/quiz"
+        android:orderInCategory="101"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/option2"
+        android:title="Choice 2"
+        android:icon="@drawable/patient"
+        android:orderInCategory="102"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/option3"
+        android:title="Choice 3"
+        android:icon="@drawable/movie"
+        android:orderInCategory="103"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/option4"
+        android:title="Choice 3"
+        android:icon="@drawable/bus"
+        android:orderInCategory="104"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/about"
+        android:title="about icon"
+        android:orderInCategory="105"
+        app:showAsAction="never"/>
+
+</menu>

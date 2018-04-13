@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="  You can choose questions here or add new questions.  "/>
+
+    <ListView
+        android:id="@+id/list_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_tf"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/question" />
+
+    <ListView
+        android:id="@+id/list_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_tf"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/list_1" />
+
+    <ListView
+        android:id="@+id/list_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_tf"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/question" />
+
+    <Button
+        android:id="@+id/button_tf"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/button_multiple"
+        android:text="True/False" />
+
+    <Button
+        android:id="@+id/button_numeric"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Numeric" />
+
+    <Button
+        android:id="@+id/button_multiple"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="Multiple" />
+</RelativeLayout>
+
+
+
+

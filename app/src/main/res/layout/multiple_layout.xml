@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="question"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/question_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/question"
+        android:layout_toEndOf="@+id/question" />
+
+    <CheckBox
+        android:id="@+id/A_fragment"
+        android:text="answerA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/question"/>
+    <EditText
+        android:id="@+id/txt_A"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/A_fragment"
+        android:layout_toEndOf="@+id/A_fragment"/>
+    <CheckBox
+        android:id="@+id/B_fragment"
+        android:text="answerB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_A"/>
+    <EditText
+        android:id="@+id/txt_B"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/B_fragment"
+        android:layout_below="@+id/txt_A"/>
+    <CheckBox
+        android:id="@+id/C_fragment"
+        android:text="answerC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_B"/>
+    <EditText
+        android:id="@+id/txt_C"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/C_fragment"
+        android:layout_below="@+id/txt_B"/>
+    <CheckBox
+        android:id="@+id/D_fragment"
+        android:text="answerD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_C"/>
+    <EditText
+        android:id="@+id/txt_D"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/D_fragment"
+        android:layout_below="@+id/txt_C"/>
+
+    <EditText
+        android:id="@+id/correct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/question"
+        android:layout_toEndOf="@+id/question" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
