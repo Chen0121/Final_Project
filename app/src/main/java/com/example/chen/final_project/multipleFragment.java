@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.chen.finalproject.R;
+import com.example.chen.final_project.R;
 
 public class multipleFragment extends Fragment {
     private boolean isTablet;
@@ -36,8 +36,8 @@ public class multipleFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view=inflater.inflate(R.layout.activity_multiple_fragment,container,false);
-        multipleQuestion=view.findViewById(R.id.multiple_question);
+        View view=inflater.inflate(R.layout.multiple_fragment,container,false);
+        multipleQuestion=view.findViewById(R.id.question_fragment);
         textA=view.findViewById(R.id.txt_A);
         textB=view.findViewById(R.id.txt_B);
         textC=view.findViewById(R.id.txt_C);

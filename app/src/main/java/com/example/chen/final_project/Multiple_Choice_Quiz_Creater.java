@@ -14,7 +14,7 @@ public class Quiz_Creator extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_creator);
+        setContentView(R.layout.activity_multiple__choice__quiz__creater);
 
         Button btn_import=(Button)findViewById(R.id.btn_import);
         btn_import.setOnClickListener(new View.OnClickListener() {

@@ -13,6 +13,7 @@ import android.os.Bundle ;
 import android.view.View ;
 import android.view.ViewGroup ;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button ;
 import android.widget.EditText ;
 import android.widget.ListView ;
@@ -39,7 +40,7 @@ public class CreateQuiz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_quiz);
+        setContentView(R.layout.create_quiz);
         db = dbHelper.getWritableDatabase();
         isTablet = (findViewById(R.id.framelayout) != null);
 
@@ -75,7 +76,7 @@ public class CreateQuiz extends AppCompatActivity {
             @Override
             public void onClick(View e) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
-                final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.layout_multiple, null);
+                final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.multiple_layout, null);
                 builder.setView(view);
                 builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -118,42 +119,35 @@ public class CreateQuiz extends AppCompatActivity {
             }
         });
 
-        list_multiple.setOnItemClickListener((AdapterView<?> adapterView, View view, int position, long id) -> {
-            String a1 = ((multipleQuestion) questionAdapter.getItem(position)
-            ).getAnswerA();
-            String a2 = ((multipleQuestion) questionAdapter.getItem(position)
-            ).getAnswerB();
-            String a3 = ((multipleQuestion) questionAdapter.getItem(position)
-            ).getAnswerC();
-            String a4 = ((multipleQuestion) questionAdapter.getItem(position)
-            ).getAnswerD();
-            String q = questionAdapter.getItem(position).getQuestion();
-            String c = ((multipleQuestion) questionAdapter.getItem(position)
-            ).getCorrect();
+        list_multiple.setOnItemClickListener((adapterView, view, position, id) -> {
+            String q = ((multipleQuestion)questionAdapter.getItem(position)).getQuestion();
+            String a1 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerA();
+            String a2 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerB();
+            String a3 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerC();
+            String a4 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerD();
+            String c = ((multipleQuestion)questionAdapter.getItem(position)).getCorrect();
             Long id_inList = questionAdapter.getId(position);
             long ID = id;
             multipleFragment Fragment = new multipleFragment();
-
             Bundle bundle = new Bundle();
             bundle.putString("Answer1", a1);
             bundle.putString("Answer2", a2);
             bundle.putString("Answer3", a3);
             bundle.putString("Answer4", a4);
             bundle.putString("Question", q);
-            bundle.putString("Correct", c);
+            bundle.putInt("Correct", c);
             bundle.putLong("IDInChat", id_inList);
             bundle.putLong("ID", ID);
 
-            if (isTablet){
+            if (isTablet) {
                 Fragment.setArguments(bundle);
                 Fragment.setIsTablet(true);
                 getFragmentManager().beginTransaction().replace(R.id.framelayout, Fragment).commit();
-            }else {
+            } else{
                 Fragment.setIsTablet(false);
                 Intent multiDetails = new Intent(CreateQuiz.this, multipleDetails.class);
                 multiDetails.putExtra("QuestionItem", bundle);
                 startActivityForResult(multiDetails, 1, bundle);
-
             }
         });
     }

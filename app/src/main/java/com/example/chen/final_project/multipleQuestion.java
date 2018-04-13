@@ -1,6 +1,6 @@
 package com.example.chen.final_project;
 
-public class multipleQuestion extends com.example.chen.finalproject.Question {
+public class multipleQuestion extends com.example.chen.final_project.Question {
     private String answerA;
     private String answerB;
     private String answerC;

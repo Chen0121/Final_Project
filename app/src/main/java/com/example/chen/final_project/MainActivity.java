@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.chen.finalproject.R;
+import com.example.chen.final_project.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.option1:
-                Intent Quiz=new Intent(MainActivity.this,Quiz_Creater.class);
+                Intent Quiz=new Intent(MainActivity.this,CreateQuiz.class);
                 startActivity(Quiz);
                 break;
             case R.id.option2:
