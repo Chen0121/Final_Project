@@ -9,8 +9,6 @@
     android:columnCount="2"
     tools:context="com.example.chen.final_project.Patient_Intake_form">
 
-
-
     <TextView
         android:id="@+id/intakeForm_Title"
         android:layout_width="match_parent"

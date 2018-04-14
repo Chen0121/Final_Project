@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chen.final_project.Movie_Information">
+    tools:context="com.example.chen.final_project.movie_information">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MOVIE INFORMATION"/>
 
 </android.support.constraint.ConstraintLayout>

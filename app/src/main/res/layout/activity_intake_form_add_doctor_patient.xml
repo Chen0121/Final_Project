@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chen.final_project.Intake_Form_Add_Doctor_Patient">
+
+    <TextView
+        android:id="@+id/intakeForm_Doctor_Patient_Description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="17dp"
+        android:text="Please fill in the following field:" />
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientName_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intakeForm_Doctor_Patient_Description"
+        android:layout_marginTop="34dp"
+        android:hint="Patient Name" />
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientAddress_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intakeForm_AddPatientName_Doctor"
+        android:hint="Patient Address"/>
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientBirthday_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intakeForm_AddPatientAddress_Doctor"
+        android:hint="Patient Birthday: YYYY/MM/DD"/>
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientPhone_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intakeForm_AddPatientBirthday_Doctor"
+        android:hint="Patient Phone Number"/>
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientHealthcard_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intakeForm_AddPatientPhone_Doctor"
+        android:hint="Patient Health Card"/>
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientDescrption_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intakeForm_AddPatientHealthcard_Doctor"
+        android:hint="Description" />
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientPreviousSurgery_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intakeForm_AddPatientDescrption_Doctor"
+        android:hint="Previous Surgery" />
+
+    <EditText
+        android:id="@+id/intakeForm_AddPatientAllergies_Doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/intakeForm_AddPatientPreviousSurgery_Doctor"
+        android:hint="Allergies" />
+
+    <Button
+        android:id="@+id/intakeForm_AddPatientSumbitButton_Doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:text="Sumbit" />
+
+    <Button
+        android:id="@+id/intakeForm_AddPatientCancelButton_Doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="Cancel" />
+
+</RelativeLayout>

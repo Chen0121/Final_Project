@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/about"
+    <item android:id="@+id/aboutZeyangHu"
         android:title="@string/intakeForm_AboutZeyangHu"
         android:orderInCategory="100"
         app:showAsAction="never"/>
 
-    <item android:id="@+id/action_one"
+    <item android:id="@+id/intakeForm_menuItemMovieInformation"
         android:title="@string/intakeForm_GoToMovieInformation"
         android:icon="@drawable/icon_movieinformation"
         android:orderInCategory="101"
         app:showAsAction="always"/>
 
-    <item android:id="@+id/action_two"
-        android:title="@string/intakeForm_GoToBusRoutineApp"
+    <item android:id="@+id/intakeForm_menuItemBusRouteApp"
+        android:title="@string/intakeForm_GoToBusRouteApp"
         android:icon="@drawable/icon_busapp"
         android:orderInCategory="102"
         app:showAsAction="always"/>
 
 
-    <item android:id="@+id/action_three"
+    <item android:id="@+id/intakeForm_menuItemQuizCreater"
         android:title="@string/intakeForm_GoToQuizCreater"
         android:icon="@drawable/icon_quizcreater"
         android:orderInCategory="103"
         app:showAsAction="always"/>
+
+    <item android:id="@+id/intakeForm_menuItemPatientList"
+        android:title="@string/intakeForm_PatientList"
+        android:orderInCategory="104"
+        app:showAsAction="never"/>
 
 
 </menu>

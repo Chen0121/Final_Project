@@ -16,9 +16,27 @@
     <string name="intakeForm_Address">Address</string>
     <string name="intakeForm_PhoneNumber">Last Name</string>
     <string name="intakeForm_HealthCard">Health Chard No.</string>
-
     <string name="intakeForm_GoToMovieInformation">To Movie Information</string>
-    <string name="intakeForm_GoToBusRoutineApp">To Bus Routine App</string>
+    <string name="intakeForm_GoToBusRouteApp">To Bus Route App</string>
     <string name="intakeForm_GoToQuizCreater">To Quiz Creater</string>
-    <string name="intakeForm_AboutZeyangHu">About Me</string>
+    <string name="intakeForm_AboutZeyangHu">About Zeyang Hu</string>
+    <string name="intakeForm_FillInInformation">Fill the following information: </string>
+    <string name="intakeForm_RegisterADoctor">Register A Doctor</string>
+    <string name="intakeForm_PatientList">Retrieve the Patient List</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="intakeForm_PatientListActivity_type">Patient Type:</string>
+    <string name="intakeForm_PatientListActivity_name">Patient Name:</string>
+    <string name="intakeForm_PatientListActivity_address">Patient Address:</string>
+    <string name="intakeForm_PatientListActivity_birthday">Birthday:</string>
+    <string name="intakeForm_PatientListActivity_phone">Phone Number:</string>
+    <string name="intakeForm_PatientListActivity_healthcard">Health Card:</string>
+    <string name="intakeForm_PatientListActivity_descrption">Description:</string>
+    <string name="intakeForm_PatientListActivity_prevsurgery">Previous Surgery:</string>
+    <string name="intakeForm_PatientListActivity_allergies">Allergies:</string>
+    <string name="intakeForm_PatientListActivity_glassesbought">GlassesBought:</string>
+    <string name="intakeForm_PatientListActivity_glassesstore">GlassesStore:</string>
+    <string name="intakeForm_PatientListActivity_benefit">Benefit:</string>
+    <string name="intakeForm_PatientListActivity_hadbraces">HadBraces:</string>
+    <string name="intakeForm_AddPatientToList">Add new Patient</string>
 </resources>
