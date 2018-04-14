@@ -8,8 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.chen.final_project.R;
-
 
 public class MainActivity extends AppCompatActivity {
 
