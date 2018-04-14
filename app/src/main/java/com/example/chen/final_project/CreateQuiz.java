@@ -119,12 +119,12 @@ public class CreateQuiz extends AppCompatActivity {
         });
 
         list_multiple.setOnItemClickListener((adapterView, view, position, id) -> {
-            String q = ((multipleQuestion)questionAdapter.getItem(position)).getQuestion();
-            String a1 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerA();
-            String a2 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerB();
-            String a3 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerC();
-            String a4 = ((multipleQuestion)questionAdapter.getItem(position)).getAnswerD();
-            String c = ((multipleQuestion)questionAdapter.getItem(position)).getCorrect();
+            String q = ((multipleQuestion) questionAdapter.getItem(position)).getQuestion();
+            String a1 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerA();
+            String a2 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerB();
+            String a3 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerC();
+            String a4 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerD();
+            String c = ((multipleQuestion) questionAdapter.getItem(position)).getCorrect();
             Long id_inList = questionAdapter.getId(position);
             long ID = id;
             multipleFragment Fragment = new multipleFragment();
@@ -134,7 +134,7 @@ public class CreateQuiz extends AppCompatActivity {
             bundle.putString("Answer3", a3);
             bundle.putString("Answer4", a4);
             bundle.putString("Question", q);
-            bundle.putInt("Correct", c);
+            bundle.putString("Correct", c);
             bundle.putLong("IDInChat", id_inList);
             bundle.putLong("ID", ID);
 
