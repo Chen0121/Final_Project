@@ -6,6 +6,7 @@ public class multipleQuestion extends com.example.chen.final_project.Question {
     private String answerC;
     private String answerD;
     private String correct;
+    private String question;
 
     public multipleQuestion(String answerA, String answerB, String answerC, String answerD, String question, String correct){
         setAnswerA(answerA);
@@ -54,5 +55,9 @@ public class multipleQuestion extends com.example.chen.final_project.Question {
 
     private void setCorrect(String correct){
         this.correct=correct;
+    }
+
+    public void setQuestion(String question){
+        this.question=question;
     }
 }

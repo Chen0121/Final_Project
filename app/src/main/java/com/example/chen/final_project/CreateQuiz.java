@@ -19,9 +19,9 @@ import android.widget.ListView ;
 import android.widget.TextView ;
 import android.widget.Toast ;
 
-import com.example.chen.final_project.R ;
-
 import java.util.ArrayList ;
+
+import static com.example.chen.final_project.QuizDatabaseHelper.*;
 
 public class CreateQuiz extends AppCompatActivity {
 
@@ -56,16 +56,16 @@ public class CreateQuiz extends AppCompatActivity {
 //        list_tf.setAdapter(questionAdapter);
 //        list_numeric.setAdapter(questionAdapter);
 
-        query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
+        query = "SELECT * FROM " + table_multiple + ";";
         cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
-            String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
-            String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
-            String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
-            String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
-            String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
+            String answerA = cursor.getString(cursor.getColumnIndex(KEY_A));
+            String answerB = cursor.getString(cursor.getColumnIndex(KEY_B));
+            String answerC = cursor.getString(cursor.getColumnIndex(KEY_C));
+            String answerD = cursor.getString(cursor.getColumnIndex(KEY_D));
+            String question = cursor.getString(cursor.getColumnIndex(KEY_Question));
+            String correct = cursor.getString(cursor.getColumnIndex(KEY_Correct));
             Question = new multipleQuestion(answerA, answerB, answerC, answerD, question, correct);
             questionArray.add(Question);
             cursor.moveToNext();
@@ -95,15 +95,15 @@ public class CreateQuiz extends AppCompatActivity {
                         questionArray.add(mQuestion);
 
                         ContentValues cv = new ContentValues();
-                        cv.put(QuizDatabaseHelper.KEY_A, ansA);
-                        cv.put(QuizDatabaseHelper.KEY_B, ansB);
-                        cv.put(QuizDatabaseHelper.KEY_C, ansC);
-                        cv.put(QuizDatabaseHelper.KEY_D, ansD);
-                        cv.put(QuizDatabaseHelper.KEY_Question, que);
-                        cv.put(QuizDatabaseHelper.KEY_Correct, correct);
+                        cv.put(KEY_A, ansA);
+                        cv.put(KEY_B, ansB);
+                        cv.put(KEY_C, ansC);
+                        cv.put(KEY_D, ansD);
+                        cv.put(KEY_Question, que);
+                        cv.put(KEY_Correct, correct);
 
-                        db.insert(QuizDatabaseHelper.table_multiple, "", cv);
-                        query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
+                        db.insert(table_multiple, "", cv);
+                        query = "SELECT * FROM " + table_multiple + ";";
                         cursor = db.rawQuery(query, null);
                         cursor.moveToFirst();
                         questionAdapter.notifyDataSetChanged();
@@ -158,9 +158,9 @@ public class CreateQuiz extends AppCompatActivity {
             if (b.getInt("action") == 1) {
                 long id = b.getLong("DeleteID");
                 long id_inList = b.getLong("IDInChat");
-                db.delete(QuizDatabaseHelper.table_multiple, QuizDatabaseHelper.KEY_ID + " = ?", new String[]{Long.toString(id)});
+                db.delete(table_multiple, KEY_ID + " = ?", new String[]{Long.toString(id)});
                 questionArray.remove((int) id_inList);
-                query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
+                query = "SELECT * FROM " + table_multiple + ";";
                 cursor = db.rawQuery(query, null);
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
@@ -171,9 +171,9 @@ public class CreateQuiz extends AppCompatActivity {
             } else if (b.getInt("action") == 2) {
                 long id = b.getLong("UpdateID");
                 long id_inList = b.getLong("IDInChat");
-                db.delete(QuizDatabaseHelper.table_multiple, QuizDatabaseHelper.KEY_ID + " = ?", new String[]{Long.toString(id)});
+                db.delete(table_multiple, KEY_ID + " = ?", new String[]{Long.toString(id)});
                 questionArray.remove((int) id_inList);
-                query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
+                query = "SELECT * FROM " + table_multiple + ";";
                 cursor = db.rawQuery(query, null);
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
@@ -200,14 +200,14 @@ public class CreateQuiz extends AppCompatActivity {
         questionArray.add(q);
         ContentValues cv = new ContentValues();
 //        cv.put(QuizDatabaseHelper.KEY_TYPE, 1);
-        cv.put(QuizDatabaseHelper.KEY_A, answer1);
-        cv.put(QuizDatabaseHelper.KEY_B, answer2);
-        cv.put(QuizDatabaseHelper.KEY_C, answer3);
-        cv.put(QuizDatabaseHelper.KEY_D, answer4);
-        cv.put(QuizDatabaseHelper.KEY_Question, que);
-        cv.put(QuizDatabaseHelper.KEY_Correct, c);
-        db.insert(QuizDatabaseHelper.table_multiple, "", cv);
-        query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
+        cv.put(KEY_A, answer1);
+        cv.put(KEY_B, answer2);
+        cv.put(KEY_C, answer3);
+        cv.put(KEY_D, answer4);
+        cv.put(KEY_Question, que);
+        cv.put(KEY_Correct, c);
+        db.insert(table_multiple,"",cv);
+        query = "SELECT * FROM " + table_multiple + ";";
         cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         questionAdapter.notifyDataSetChanged();
@@ -217,9 +217,9 @@ public class CreateQuiz extends AppCompatActivity {
         String query;
         long id = idInDatabase;
         long id_inList = idInList;
-        db.delete(QuizDatabaseHelper.table_multiple, QuizDatabaseHelper.KEY_ID + " = ?", new String[]{Long.toString(id)});
+        db.delete(table_multiple, KEY_ID + " = ?", new String[]{Long.toString(id)});
         questionArray.remove((int) id_inList);
-        query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
+        query = "SELECT * FROM " + table_multiple + ";";
         cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         questionAdapter.notifyDataSetChanged();

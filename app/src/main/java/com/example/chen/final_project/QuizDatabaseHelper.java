@@ -7,13 +7,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class QuizDatabaseHelper extends SQLiteOpenHelper {
-    private static final int db_version = 1;
+    private static final int db_version = 5;
     private static final String db_name = "Quiz.db";
     public static final String table_multiple = "table_multipleChoice";
     public static final String table_numeric = "table_numericQuestion";
     public static final String table_tf = "table_tfQuestion";
     public static final String KEY_ID = "id";
-    //    public static final String KEY_TYPE = "type";
     public static final String KEY_Question = "question";
     public static final String KEY_Correct = "correctAnswer";
     public static final String KEY_A = "AnswerA";
@@ -30,10 +29,10 @@ public class QuizDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             Log.i("QuizDatabaseHelper", "onCreate");
-            db.execSQL( "CREATE TABLE " + table_multiple + " ( "+ KEY_ID +" INTEGER PRIMARY KEY " +
-                    "AUTOINCREMENT, " +KEY_Question+ "text, "+KEY_Correct +"text, "+ KEY_A
-                    + "text, "+ KEY_B + "text, " + KEY_C + "text, " + KEY_D + "text );"
-            );
+            db.execSQL("CREATE TABLE " + table_multiple + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + KEY_Question + " text, " + KEY_Correct + " text, " + KEY_A + " text, " + KEY_B + " text, "
+                    + KEY_C + " text, " + KEY_D+ " text);");
+
             /*db.execSQL( "CREATE TABLE " + table_numeric + " ( "+ KEY_ID +" INTEGER PRIMARY KEY " +
                     "AUTOINCREMENT, " +KEY_Question+ "text, "+KEY_Correct +"text, "+ KEY_A
                     + "text )"

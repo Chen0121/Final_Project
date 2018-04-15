@@ -67,12 +67,21 @@
         android:layout_toEndOf="@+id/D_fragment"
         android:layout_below="@+id/txt_C"/>
 
+    <TextView
+        android:id="@+id/textview_correct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txt_D"
+        android:text="correct" />
+
     <EditText
         android:id="@+id/correct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/question"
-        android:layout_toEndOf="@+id/question" />
+        android:layout_below="@+id/txt_D"
+        android:layout_toEndOf="@id/textview_correct" />
 
     <Button
         android:id="@+id/update"
