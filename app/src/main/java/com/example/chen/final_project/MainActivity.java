@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.option1:
-                Intent Quiz=new Intent(MainActivity.this,CreateQuiz.class);
+                Intent Quiz=new Intent(MainActivity.this,Function.class);
                 startActivity(Quiz);
                 break;
             case R.id.option2:

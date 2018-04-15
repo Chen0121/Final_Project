@@ -38,8 +38,8 @@
         android:id="@+id/btn_create"
         android:layout_width="150dp"
         android:layout_height="65dp"
-        android:layout_above="@+id/btn_statistic"
-        android:layout_alignStart="@+id/btn_statistic"
+        android:layout_above="@+id/btn_stat"
+        android:layout_alignStart="@+id/btn_stat"
         android:layout_marginBottom="45dp"
         android:text="create a quiz" />
 
@@ -52,7 +52,7 @@
         android:src="@drawable/three" />
 
     <Button
-        android:id="@+id/btn_statistic"
+        android:id="@+id/btn_stat"
         android:layout_width="150dp"
         android:layout_height="65dp"
         android:layout_above="@+id/btn_quit"
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="65dp"
         android:layout_alignStart="@+id/one"
-        android:layout_below="@+id/btn_statistic"
+        android:layout_below="@+id/btn_stat"
         android:src="@drawable/four" />
 
     <Button

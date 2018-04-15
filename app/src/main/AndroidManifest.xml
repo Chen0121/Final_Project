@@ -8,8 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
-       >
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,11 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.chen.final_project.CreateQuiz" />
-        <activity android:name="com.example.chen.final_project.Quiz_Creator" />
+        <activity android:name=".CreateQuiz" />
+        <activity android:name=".GetStat" />
+        <activity android:name=".multipleDetails" />
+        <activity android:name=".Quiz_Creator" />
         <activity android:name=".Patient_Intake_form" />
         <activity android:name=".Movie_Information" />
-        <activity android:name=".OCTranspo_Bus_Route_App"></activity>
+        <activity android:name=".OCTranspo_Bus_Route_App" />
+        <activity android:name=".Function"></activity>
     </application>
 
 </manifest>

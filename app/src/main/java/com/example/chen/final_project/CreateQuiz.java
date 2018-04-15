@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase ;
 import android.support.v7.app.AlertDialog ;
 import android.support.v7.app.AppCompatActivity ;
 import android.os.Bundle ;
+import android.util.Log;
 import android.view.View ;
 import android.view.ViewGroup ;
 import android.widget.ArrayAdapter;
@@ -24,7 +25,6 @@ import java.util.ArrayList ;
 import static com.example.chen.final_project.QuizDatabaseHelper.*;
 
 public class CreateQuiz extends AppCompatActivity {
-    private ListView list_multiple;
     private Button btn_multiple;
     private Cursor cursor;
     private String query;
@@ -40,9 +40,9 @@ public class CreateQuiz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_quiz);
         db = dbHelper.getWritableDatabase();
-        isTablet = (findViewById(R.id.framelayout) != null);
+        isTablet = (findViewById(R.id.frame_layout) != null);
 
-        list_multiple = findViewById(R.id.list_1);
+        ListView list_multiple = findViewById(R.id.list_1);
 //        list_tf = findViewById(R.id.list_2);
 //        list_numeric = findViewById(R.id.list_3);
 
@@ -101,6 +101,15 @@ public class CreateQuiz extends AppCompatActivity {
                 db.insert(table_multiple, "", cv);
                 query = "SELECT * FROM " + table_multiple + ";";
                 cursor = db.rawQuery(query, null);
+
+               /* String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
+                String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
+                String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
+                String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
+                String question1 = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+                String correct2 = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
+
+                Log.i("id it write", answerA+" "+answerB+" "+answerC+" "+answerD+" "+question1+" "+correct2);*/
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
             });
@@ -114,33 +123,36 @@ public class CreateQuiz extends AppCompatActivity {
 
         list_multiple.setOnItemClickListener((adapterView, view, position, id) -> {
             String a1 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerA();
+            Log.i("test","String  "+ a1);
             String a2 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerB();
             String a3 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerC();
             String a4 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerD();
             String q = questionAdapter.getItem(position).getQuestion();
+            Log.i("test","String "+ q);
             String c = ((multipleQuestion) questionAdapter.getItem(position)).getCorrect();
+            Log.i("test","String   "+ c);
             long id_inList = questionAdapter.getId(position);
-            long ID = id;
             multipleFragment Fragment = new multipleFragment();
 
             Bundle bundle = new Bundle();
-            bundle.putString("Answer1", a1);
-            bundle.putString("Answer2", a2);
-            bundle.putString("Answer3", a3);
-            bundle.putString("Answer4", a4);
+            bundle.putString("answerA", a1);
+            bundle.putString("answerB", a2);
+            bundle.putString("answerC", a3);
+            bundle.putString("answerD", a4);
             bundle.putString("Question", q);
-            bundle.putString("Correct", c);
+            bundle.putString("correct", c);
             bundle.putLong("IDInChat", id_inList);
-            bundle.putLong("ID", ID);
+            bundle.putLong("ID", id);
+
 
             if (isTablet) {
                 Fragment.setArguments(bundle);
                 Fragment.setIsTablet(true);
-                getFragmentManager().beginTransaction().replace(R.id.framelayout, Fragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.frame_layout, Fragment).commit();
             } else{
                 Fragment.setIsTablet(false);
                 Intent multiDetails = new Intent(CreateQuiz.this, multipleDetails.class);
-                multiDetails.putExtra("QuestionItem", bundle);
+                multiDetails.putExtra("Question", bundle);
                 startActivityForResult(multiDetails, 1, bundle);
             }
         });
@@ -173,12 +185,12 @@ public class CreateQuiz extends AppCompatActivity {
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
 
-                String ans1 = b.getString("Ans1");
-                String ans2 = b.getString("Ans2");
-                String ans3 = b.getString("Ans3");
-                String ans4 = b.getString("Ans4");
+                String ans1 = b.getString("answerA");
+                String ans2 = b.getString("answerB");
+                String ans3 = b.getString("answerC");
+                String ans4 = b.getString("answerD");
                 String question = b.getString("Question");
-                String correct = b.getString("Correct");
+                String correct = b.getString("correct");
                 updateForTablet(ans1, ans2, ans3, ans4, question, correct);
             }
         }
@@ -225,18 +237,20 @@ public class CreateQuiz extends AppCompatActivity {
         db.close();
     }
 
-    private class QuestionAdapter extends ArrayAdapter<Question> {
+    class QuestionAdapter extends ArrayAdapter<Question> {
 
         private QuestionAdapter(Context ctx) {
             super(ctx, 0);
         }
 
+        public int getCount(){ return questionArray.size();}
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View result;
             TextView Txt;
-            result = CreateQuiz.this.getLayoutInflater().inflate(R.layout.multiple_fragment, null);
-            Txt = result.findViewById(R.id.question_txt);
+            result = CreateQuiz.this.getLayoutInflater().inflate(R.layout.question, null);
+            Txt = result.findViewById(R.id.text_view);
             Txt.setText(getItem(position).getQuestion());
             return result;
         }
@@ -244,7 +258,7 @@ public class CreateQuiz extends AppCompatActivity {
         @Override
         public long getItemId(int position) {
             cursor.moveToPosition(position);
-            return cursor.getLong(cursor.getColumnIndex("ID"));
+            return cursor.getLong(cursor.getColumnIndex("id"));
         }
 
         @Override

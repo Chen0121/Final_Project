@@ -30,7 +30,7 @@ public class Quiz_Creator extends Activity{
             }
         });
 
-        Button btn_statistic=(Button)findViewById(R.id.btn_statistic);
+        Button btn_statistic=(Button)findViewById(R.id.btn_stat);
         btn_statistic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

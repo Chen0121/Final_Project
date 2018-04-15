@@ -12,10 +12,10 @@ public class multipleDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.multiple_details);
 
-        Bundle bundle = getIntent().getBundleExtra("QuizItem");
+        Bundle bundle = getIntent().getBundleExtra("Question");
         multipleFragment Fragment = new multipleFragment();
         Fragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.framelayout, Fragment).commit();
+        transaction.replace(R.id.frame_layout, Fragment).commit();
     }
 }
