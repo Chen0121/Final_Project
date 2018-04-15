@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.chen.final_project.R;
 
 public class multipleDetails extends AppCompatActivity {
 

@@ -37,33 +37,35 @@ public class multipleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view=inflater.inflate(R.layout.multiple_fragment,container,false);
-        multipleQuestion=view.findViewById(R.id.question_fragment);
+        bundle=getArguments();
         textA=view.findViewById(R.id.txt_A);
         textB=view.findViewById(R.id.txt_B);
         textC=view.findViewById(R.id.txt_C);
         textD=view.findViewById(R.id.txt_D);
+        multipleQuestion=view.findViewById(R.id.question_fragment);
+        multipleCorrect=view.findViewById(R.id.correct);
+
         checkA=view.findViewById(R.id.A_fragment);
         checkB=view.findViewById(R.id.B_fragment);
         checkC=view.findViewById(R.id.C_fragment);
         checkD=view.findViewById(R.id.D_fragment);
         btn_delete=view.findViewById(R.id.delete);
         btn_update=view.findViewById(R.id.update);
-        bundle=getArguments();
 
-        final String question=bundle.getString("Question");
         String answerA=bundle.getString("answerA");
         String answerB=bundle.getString("answerB");
         String answerC=bundle.getString("answerC");
         String answerD=bundle.getString("answerD");
+        final String question=bundle.getString("Question");
         final String correct=bundle.getString("correct");
         final long id=bundle.getLong("ID");
         final long id_inChat = bundle.getLong("IDInChat");
 
-        multipleQuestion.setText(question);
         textA.setText(answerA);
         textB.setText(answerB);
         textC.setText(answerC);
         textD.setText(answerD);
+        multipleQuestion.setText(question);
         multipleCorrect.setText(correct);
 
         if(correct.equals("A")){
@@ -78,96 +80,68 @@ public class multipleFragment extends Fragment {
             throw new IllegalArgumentException("checkbox did not match");
         }
 
-        checkA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkB.setChecked(false);
-                checkC.setChecked(false);
-                checkD.setChecked(false);
-            }
+        checkA.setOnClickListener(view1 -> {
+            checkB.setChecked(false);
+            checkC.setChecked(false);
+            checkD.setChecked(false);
         });
-        checkB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkA.setChecked(false);
-                checkC.setChecked(false);
-                checkD.setChecked(false);
-            }
+        checkB.setOnClickListener(view12 -> {
+            checkA.setChecked(false);
+            checkC.setChecked(false);
+            checkD.setChecked(false);
         });
-        checkC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkA.setChecked(false);
-                checkB.setChecked(false);
-                checkD.setChecked(false);
-            }
+        checkC.setOnClickListener(view13 -> {
+            checkA.setChecked(false);
+            checkB.setChecked(false);
+            checkD.setChecked(false);
         });
-        checkD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkA.setChecked(false);
-                checkB.setChecked(false);
-                checkC.setChecked(false);
+        checkD.setOnClickListener(view14 -> {
+            checkA.setChecked(false);
+            checkB.setChecked(false);
+            checkC.setChecked(false);
+        });
+
+        btn_delete.setOnClickListener(view15 -> {
+            if(isTablet){
+                CreateQuiz createQuiz=(CreateQuiz)getActivity();
+                createQuiz.deleteForTablet(id,id_inChat);
+                getFragmentManager().beginTransaction().remove(multipleFragment.this).commit();
+            }else{
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("action", 1);
+                Intent deleteID = resultIntent.putExtra("DeleteID", id);
+                resultIntent.putExtra("IDInChat", id_inChat);
+                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+                getActivity().finish();
             }
         });
 
-        btn_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isTablet){
-                    CreateQuiz createQuiz=(CreateQuiz)getActivity();
-                    createQuiz.deleteForTablet(id,id_inChat);
-                    getFragmentManager().beginTransaction().remove(multipleFragment.this).commit();
-                }else{
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra("action", 1);
-                    Intent deleteID = resultIntent.putExtra("DeleteID", id);
-                    resultIntent.putExtra("IDInChat", id_inChat);
-                    getActivity().setResult(Activity.RESULT_OK, resultIntent);
-                    getActivity().finish();
-                }
-            }
-        });
+        btn_update.setOnClickListener(view16 -> {
+            String newA=textA.getText().toString();
+            String newB=textB.getText().toString();
+            String newC=textC.getText().toString();
+            String newD=textD.getText().toString();
+            String newQuestion=multipleQuestion.getText().toString();
+            String newCorrect =multipleCorrect.getText().toString();
 
-        btn_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String newQuestion=multipleQuestion.getText().toString();
-                String newA=textA.getText().toString();
-                String newB=textB.getText().toString();
-                String newC=textC.getText().toString();
-                String newD=textD.getText().toString();
-                String newCorrect = null;
-                if(checkA.isChecked()){
-                    newCorrect="A";
-                }else if(checkB.isChecked()){
-                    newCorrect="B";
-                }else if(checkC.isChecked()){
-                    newCorrect="C";
-                }else if(checkD.isChecked()){
-                    newCorrect="D";
-                }
-
-                if(isTablet){
-                    CreateQuiz createQuiz=(CreateQuiz)getActivity();
-                    createQuiz.deleteForTablet(id, id_inChat);
-                    createQuiz.updateForTablet(newA, newB, newC, newD, newQuestion, newCorrect);
-                    getFragmentManager().beginTransaction().remove(multipleFragment.this).commit();
-                }else {
-                    Intent resultIntent=new Intent();
-                    resultIntent.putExtra("type", 1);
-                    resultIntent.putExtra("action", 2);
-                    resultIntent.putExtra("NewQuestion",newQuestion);
-                    resultIntent.putExtra("AnswerA",newA);
-                    resultIntent.putExtra("AnswerB",newB);
-                    resultIntent.putExtra("AnswerC",newC);
-                    resultIntent.putExtra("AnswerD",newD);
-                    resultIntent.putExtra("NewCorrect",newCorrect);
-                    resultIntent.putExtra("UpdateID", id);
-                    resultIntent.putExtra("IDInChat", id_inChat);
-                    getActivity().setResult(Activity.RESULT_OK, resultIntent);
-                    getActivity().finish();
-                }
+            if(isTablet){
+                CreateQuiz createQuiz=(CreateQuiz)getActivity();
+                createQuiz.deleteForTablet(id, id_inChat);
+                createQuiz.updateForTablet(newA, newB, newC, newD, newQuestion, newCorrect);
+                getFragmentManager().beginTransaction().remove(multipleFragment.this).commit();
+            }else {
+                Intent resultIntent=new Intent();
+                resultIntent.putExtra("action", 2);
+                resultIntent.putExtra("AnswerA",newA);
+                resultIntent.putExtra("AnswerB",newB);
+                resultIntent.putExtra("AnswerC",newC);
+                resultIntent.putExtra("AnswerD",newD);
+                resultIntent.putExtra("NewQuestion",newQuestion);
+                resultIntent.putExtra("NewCorrect",newCorrect);
+                resultIntent.putExtra("UpdateID", id);
+                resultIntent.putExtra("IDInChat", id_inChat);
+                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+                getActivity().finish();
             }
         });
         return view;

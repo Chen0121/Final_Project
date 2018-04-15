@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class QuizDatabaseHelper extends SQLiteOpenHelper {
-    private static final int db_version = 5;
+    private static final int db_version = 7;
     private static final String db_name = "Quiz.db";
     public static final String table_multiple = "table_multipleChoice";
     public static final String table_numeric = "table_numericQuestion";

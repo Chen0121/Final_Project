@@ -24,13 +24,12 @@ import java.util.ArrayList ;
 import static com.example.chen.final_project.QuizDatabaseHelper.*;
 
 public class CreateQuiz extends AppCompatActivity {
-
     private ListView list_multiple;
     private Button btn_multiple;
     private Cursor cursor;
     private String query;
     private QuizDatabaseHelper dbHelper = new QuizDatabaseHelper(this);
-    private SQLiteDatabase db = null;
+    private SQLiteDatabase db;
     private boolean isTablet;
     private Question Question;
     private ArrayList<Question> questionArray = new ArrayList<>();
@@ -56,78 +55,74 @@ public class CreateQuiz extends AppCompatActivity {
 //        list_tf.setAdapter(questionAdapter);
 //        list_numeric.setAdapter(questionAdapter);
 
-        query = "SELECT * FROM " + table_multiple + ";";
+        query = "SELECT * FROM " + QuizDatabaseHelper.table_multiple + ";";
         cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            String answerA = cursor.getString(cursor.getColumnIndex(KEY_A));
-            String answerB = cursor.getString(cursor.getColumnIndex(KEY_B));
-            String answerC = cursor.getString(cursor.getColumnIndex(KEY_C));
-            String answerD = cursor.getString(cursor.getColumnIndex(KEY_D));
-            String question = cursor.getString(cursor.getColumnIndex(KEY_Question));
-            String correct = cursor.getString(cursor.getColumnIndex(KEY_Correct));
+            String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
+            String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
+            String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
+            String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
+            String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+            String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
             Question = new multipleQuestion(answerA, answerB, answerC, answerD, question, correct);
             questionArray.add(Question);
             cursor.moveToNext();
         }
 
-        btn_multiple.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View e) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
-                final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.multiple_layout, null);
-                builder.setView(view);
-                builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        EditText a = view.findViewById(R.id.txt_A);
-                        EditText b = view.findViewById(R.id.txt_B);
-                        EditText c = view.findViewById(R.id.txt_C);
-                        EditText d = view.findViewById(R.id.txt_D);
-                        EditText question = view.findViewById(R.id.question_fragment);
-                        EditText cor = view.findViewById(R.id.correct);
-                        String ansA = a.getText().toString();
-                        String ansB = b.getText().toString();
-                        String ansC = c.getText().toString();
-                        String ansD = d.getText().toString();
-                        String que = question.getText().toString();
-                        String correct = cor.getText().toString();
-                        multipleQuestion mQuestion = new multipleQuestion(ansA, ansB, ansC, ansD, que, correct);
-                        questionArray.add(mQuestion);
+        btn_multiple.setOnClickListener(e -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
+            final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.multiple_layout, null);
+            builder.setView(view);
+            builder.setPositiveButton("ADD", (dialog, id) -> {
+                EditText a = view.findViewById(R.id.txt_A);
+                EditText b = view.findViewById(R.id.txt_B);
+                EditText c = view.findViewById(R.id.txt_C);
+                EditText d = view.findViewById(R.id.txt_D);
+                EditText question = view.findViewById(R.id.question_fragment);
+                EditText cor = view.findViewById(R.id.correct);
+                String ansA = a.getText().toString();
+                String ansB = b.getText().toString();
+                String ansC = c.getText().toString();
+                String ansD = d.getText().toString();
+                String que = question.getText().toString();
+                String correct = cor.getText().toString();
+                multipleQuestion mQuestion = new multipleQuestion(ansA, ansB, ansC, ansD, que, correct);
+                questionArray.add(mQuestion);
 
-                        ContentValues cv = new ContentValues();
-                        cv.put(KEY_A, ansA);
-                        cv.put(KEY_B, ansB);
-                        cv.put(KEY_C, ansC);
-                        cv.put(KEY_D, ansD);
-                        cv.put(KEY_Question, que);
-                        cv.put(KEY_Correct, correct);
+                ContentValues cv = new ContentValues();
+                cv.put(KEY_A, ansA);
+                cv.put(KEY_B, ansB);
+                cv.put(KEY_C, ansC);
+                cv.put(KEY_D, ansD);
+                cv.put(KEY_Question, que);
+                cv.put(KEY_Correct, correct);
 
-                        db.insert(table_multiple, "", cv);
-                        query = "SELECT * FROM " + table_multiple + ";";
-                        cursor = db.rawQuery(query, null);
-                        cursor.moveToFirst();
-                        questionAdapter.notifyDataSetChanged();
-                    }
-                });
-                builder.setNegativeButton(R.string.CANCEL_multiple, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
+                db.insert(table_multiple, "", cv);
+                query = "SELECT * FROM " + table_multiple + ";";
+                cursor = db.rawQuery(query, null);
+                cursor.moveToFirst();
+                questionAdapter.notifyDataSetChanged();
+            });
+            builder.setNegativeButton(R.string.CANCEL_multiple, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
         });
 
         list_multiple.setOnItemClickListener((adapterView, view, position, id) -> {
-            String q = ((multipleQuestion) questionAdapter.getItem(position)).getQuestion();
             String a1 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerA();
             String a2 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerB();
             String a3 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerC();
             String a4 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerD();
+            String q = questionAdapter.getItem(position).getQuestion();
             String c = ((multipleQuestion) questionAdapter.getItem(position)).getCorrect();
-            Long id_inList = questionAdapter.getId(position);
+            long id_inList = questionAdapter.getId(position);
             long ID = id;
             multipleFragment Fragment = new multipleFragment();
+
             Bundle bundle = new Bundle();
             bundle.putString("Answer1", a1);
             bundle.putString("Answer2", a2);
@@ -190,16 +185,15 @@ public class CreateQuiz extends AppCompatActivity {
     }
 
     public void updateForTablet(String ans1, String ans2, String ans3, String ans4, String question, String correct) {
-        String que = question;
         String answer1 = ans1;
         String answer2 = ans2;
         String answer3 = ans3;
         String answer4 = ans4;
+        String que = question;
         String c = correct;
         Question q = new multipleQuestion(answer1, answer2, answer3, answer4, que, c);
         questionArray.add(q);
         ContentValues cv = new ContentValues();
-//        cv.put(QuizDatabaseHelper.KEY_TYPE, 1);
         cv.put(KEY_A, answer1);
         cv.put(KEY_B, answer2);
         cv.put(KEY_C, answer3);
@@ -262,7 +256,6 @@ public class CreateQuiz extends AppCompatActivity {
         public long getId(int position) {
             return position;
         }
-
 
     }
 }

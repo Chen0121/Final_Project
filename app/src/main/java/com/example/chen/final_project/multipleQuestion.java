@@ -1,12 +1,11 @@
 package com.example.chen.final_project;
 
-public class multipleQuestion extends com.example.chen.final_project.Question {
+public class multipleQuestion extends Question {
     private String answerA;
     private String answerB;
     private String answerC;
     private String answerD;
     private String correct;
-    private String question;
 
     public multipleQuestion(String answerA, String answerB, String answerC, String answerD, String question, String correct){
         setAnswerA(answerA);
@@ -57,7 +56,4 @@ public class multipleQuestion extends com.example.chen.final_project.Question {
         this.correct=correct;
     }
 
-    public void setQuestion(String question){
-        this.question=question;
-    }
 }

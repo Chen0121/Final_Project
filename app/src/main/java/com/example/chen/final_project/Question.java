@@ -2,9 +2,8 @@ package com.example.chen.final_project;
 
 public abstract class Question {
     private String question;
-    private int type;
 
-    String getQuestion() {
+    public String getQuestion() {
         return question;
     }
 
@@ -12,8 +11,6 @@ public abstract class Question {
         this.question = question;
     }
 
-    public int type() {
-        return type;
-    }
+
 }
 
