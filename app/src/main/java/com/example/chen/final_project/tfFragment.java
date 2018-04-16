@@ -32,16 +32,16 @@ public class tfFragment extends Fragment {
         Button btn_update = view.findViewById(R.id.updatetf);
 
         Bundle bundle = getArguments();
-
         String tfquestion= bundle.getString("question");
-        String tf_correct= bundle.getString("correct");
+        String tfanswer= bundle.getString("answer");
+        String questionType = bundle.getString("QuestionType");
         final long id= bundle.getLong("ID");
         final long list = bundle.getLong("LIST");
 
         tfQuestion.setText(tfquestion);
-        if(tf_correct.equals("True")){
+        if(tfanswer.equals("1")){
             checkA.setChecked(true);
-        }else if(tf_correct.equals("False")){
+        }else if(tfanswer.equals("2")){
             checkB.setChecked(true);
         }
 
@@ -53,8 +53,9 @@ public class tfFragment extends Fragment {
             }else{
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("choice", 1);
-                Intent deleteID = resultIntent.putExtra("deleteID", id);
+                resultIntent.putExtra("deleteID", id);
                 resultIntent.putExtra("LIST", list);
+                resultIntent.putExtra("QuestionType", "tf");
                 getActivity().setResult(Activity.RESULT_OK, resultIntent);
                 getActivity().finish();
             }
@@ -65,9 +66,9 @@ public class tfFragment extends Fragment {
             String newCor ="";
 
             if(checkA.isChecked()){
-                newCor = "True";
+                newCor = "1";
             }else if(checkB.isChecked()){
-                newCor = "False";
+                newCor = "2";
             }
 
             if (isTablet) {
@@ -79,9 +80,10 @@ public class tfFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.putExtra("choice", 2);
                 intent.putExtra("question",newQuestion);
-                intent.putExtra("correct", newCor);
+                intent.putExtra("answer", newCor);
                 intent.putExtra("UpdateID", id);
                 intent.putExtra("LIST", list);
+                intent.putExtra("QuestionType", "tf");
                 getActivity().setResult(Activity.RESULT_OK, intent);
                 getActivity().finish();
             }

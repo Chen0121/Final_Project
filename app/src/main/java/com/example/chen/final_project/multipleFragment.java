@@ -50,7 +50,7 @@ public class multipleFragment extends Fragment {
         Button btn_update = view.findViewById(R.id.update);
 
         Bundle bundle = getArguments();
-        final String questionType = bundle.getString("QuestionType");
+        String questionType = bundle.getString("QuestionType");
         String answerA= bundle.getString("answerA");
         String answerB= bundle.getString("answerB");
         String answerC= bundle.getString("answerC");

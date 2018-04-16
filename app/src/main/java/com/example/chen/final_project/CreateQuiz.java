@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase ;
 import android.support.v7.app.AlertDialog ;
 import android.support.v7.app.AppCompatActivity ;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View ;
 import android.view.ViewGroup ;
 import android.widget.ArrayAdapter;
@@ -29,11 +30,11 @@ public class CreateQuiz extends AppCompatActivity {
     private QuizDatabaseHelper dbHelper = new QuizDatabaseHelper(this);
     private SQLiteDatabase db;
     private boolean isTablet;
-    private boolean isTrue;
+    private boolean isTrue=true;
     private Question Question;
     private ArrayList<Question> questionArray = new ArrayList<>();
     private QuestionAdapter questionAdapter;
-    private Bundle bundle;
+    private Bundle  bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,11 @@ public class CreateQuiz extends AppCompatActivity {
         query = "SELECT * FROM " + QuizDatabaseHelper.table_name + ";";
         cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
+        Log.i("here","1");
         while (!cursor.isAfterLast()) {
+            Log.i("here","2");
             if(bundle.getString("QuestionType").equals("multiple")) {
+                Log.i("here","3");
                 String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
                 String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
                 String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
@@ -153,7 +157,6 @@ public class CreateQuiz extends AppCompatActivity {
 
         list_multiple.setOnItemClickListener((adapterView, view, position, id) -> {
             int answer = 0;
-            bundle=new Bundle();
             if (bundle.getString("QuestionType").equals("multiple")) {
                 String a1 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerA();
                 String a2 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerB();
@@ -193,7 +196,9 @@ public class CreateQuiz extends AppCompatActivity {
                     answer = 2;
                 }
                 long id_inList = questionAdapter.getId(position);
+                
                 tfFragment Fragment = new tfFragment();
+                Bundle bundle=new Bundle();
                 bundle.putString("QuestionType", "tf");
                 bundle.putString("Question", q);
                 bundle.putString("answer", String.valueOf(answer));
@@ -228,15 +233,18 @@ public class CreateQuiz extends AppCompatActivity {
             if (b.getInt("choice") == 1) {
                 long id = b.getLong("deleteID");
                 long id_inList = b.getLong("LIST");
+
                 db.delete(table_name, KEY_ID + " = ?", new String[]{Long.toString(id)});
                 questionArray.remove((int) id_inList);
                 query = "SELECT * FROM " + table_name + ";";
                 cursor = db.rawQuery(query, null);
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
+
             } else if (b.getInt("choice") == 2) {
                 long id = b.getLong("UpdateID");
                 long id_inList = b.getLong("LIST");
+
                 db.delete(table_name, KEY_ID + " = ?", new String[]{Long.toString(id)});
                 questionArray.remove((int) id_inList);
                 query = "SELECT * FROM " + table_name + ";";
