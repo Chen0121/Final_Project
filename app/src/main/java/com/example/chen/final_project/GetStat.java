@@ -23,9 +23,8 @@ public class GetStat extends Activity {
     private String str_longest;
     private String str_average;
 
-    String table_multiple = QuizDatabaseHelper.table_multiple;
-    String tableName_tf = QuizDatabaseHelper.table_tf;
-    String tableName_numeric = QuizDatabaseHelper.table_numeric;
+    String table_name = QuizDatabaseHelper.table_name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class GetStat extends Activity {
         s=findViewById(R.id.view2);
         a=findViewById(R.id.view3);
 
-        query="SELECT * FROM " + table_multiple + ";";
+        query="SELECT * FROM " + table_name + ";";
         cursor=db.rawQuery(query,null);
         cursor.moveToFirst();
 

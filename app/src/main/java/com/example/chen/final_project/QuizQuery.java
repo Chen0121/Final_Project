@@ -1,10 +1,8 @@
 package com.example.chen.final_project;
 
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -15,15 +13,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_A;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_B;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_C;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_Correct;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_D;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_Question;
-import static com.example.chen.final_project.QuizDatabaseHelper.table_multiple;
-
 
 //public class ImportQuiz extends Activity {
 
@@ -50,9 +39,8 @@ public class QuizQuery extends AsyncTask<String, Integer, String> {
     private String query;
     private Cursor cursor;
     int c;
-    private String table_numeric = QuizDatabaseHelper.table_numeric;
-    private String table_tf = QuizDatabaseHelper.table_tf;
-    private String table_multiple = QuizDatabaseHelper.table_multiple;
+    private String table_name = QuizDatabaseHelper.table_name;
+
     private ArrayList<Question> questionArray = new ArrayList<>();
 
         @Override

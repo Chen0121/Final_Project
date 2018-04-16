@@ -50,7 +50,7 @@ public class multipleFragment extends Fragment {
         Button btn_update = view.findViewById(R.id.update);
 
         Bundle bundle = getArguments();
-
+        final String questionType = bundle.getString("QuestionType");
         String answerA= bundle.getString("answerA");
         String answerB= bundle.getString("answerB");
         String answerC= bundle.getString("answerC");
@@ -104,6 +104,7 @@ public class multipleFragment extends Fragment {
                 intent.putExtra("answerD", newD);
                 intent.putExtra("Question",newQuestion);
                 intent.putExtra("correct", newCorrect);
+                intent.putExtra("QuestionType", "multiple");
                 intent.putExtra("UpdateID", id);
                 intent.putExtra("LIST", list);
                 getActivity().setResult(Activity.RESULT_OK, intent);
