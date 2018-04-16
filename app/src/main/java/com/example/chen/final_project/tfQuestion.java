@@ -1,12 +1,23 @@
 package com.example.chen.final_project;
 
-import android.app.Activity;
-import android.os.Bundle;
+public class tfQuestion  extends Question {
 
-public class tfQuestion extends Activity {
+    private boolean answer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public tfQuestion() {
+
+    }
+
+    public tfQuestion(boolean answer,String question) {
+        setAnswer(answer);
+        setQuestion(question);
+    }
+
+    public boolean isRight() {
+        return answer;
+    }
+
+    public void setAnswer(boolean answer) {
+        this.answer = answer;
     }
 }

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Final_Project</string>
     <string name="CANCEL_multiple">CANCEL</string>
+    <string name="ADD_multiple">ADD</string>
+    <string name="ADD_tf">ADD</string>
+    <string name="CANCEL_tf">CANCEL</string>
 </resources>

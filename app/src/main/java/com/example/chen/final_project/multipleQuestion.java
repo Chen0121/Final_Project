@@ -7,6 +7,10 @@ public class multipleQuestion extends Question {
     private String answerD;
     private String correct;
 
+    public multipleQuestion(){
+
+    }
+
     public multipleQuestion(String answerA, String answerB, String answerC, String answerD, String question, String correct){
         setAnswerA(answerA);
         setAnswerB(answerB);
@@ -52,7 +56,7 @@ public class multipleQuestion extends Question {
         this.answerD=answerD;
     }
 
-    private void setCorrect(String correct){
+    public void setCorrect(String correct){
         this.correct=correct;
     }
 

@@ -8,6 +8,6 @@ public class Movie_Information extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie__information);
+        setContentView(R.layout.activity_movie_information);
     }
 }

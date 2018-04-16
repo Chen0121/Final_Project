@@ -1,9 +1,5 @@
 package com.example.chen.final_project;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,21 +10,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.chen.final_project.R;
-
 import java.util.ArrayList;
 
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_A;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_B;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_C;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_Correct;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_D;
-import static com.example.chen.final_project.QuizDatabaseHelper.KEY_Question;
-import static com.example.chen.final_project.QuizDatabaseHelper.table_multiple;
-
 public class multipleFragment extends Fragment {
-    private boolean isTablet;
     private CheckBox checkA;
     private CheckBox checkB;
     private CheckBox checkC;
@@ -39,14 +23,8 @@ public class multipleFragment extends Fragment {
     private EditText textD;
     private EditText multipleQuestion;
     private EditText multipleCorrect;
-    private Button btn_update;
-    private Button btn_delete;
-    private Bundle bundle;
-    private Cursor cursor;
-    private SQLiteDatabase db;
-    private String query;
     private ArrayList<Question> questionArray = new ArrayList<>();
-    private CreateQuiz.QuestionAdapter questionAdapter;
+    private boolean isTablet;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +35,6 @@ public class multipleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View view=inflater.inflate(R.layout.multiple_fragment,container,false);
-
         textA=view.findViewById(R.id.txt_A);
         textB=view.findViewById(R.id.txt_B);
         textC=view.findViewById(R.id.txt_C);
@@ -69,19 +46,19 @@ public class multipleFragment extends Fragment {
         checkB=view.findViewById(R.id.B_fragment);
         checkC=view.findViewById(R.id.C_fragment);
         checkD=view.findViewById(R.id.D_fragment);
-        btn_delete=view.findViewById(R.id.delete);
-        btn_update=view.findViewById(R.id.update);
+        Button btn_delete = view.findViewById(R.id.delete);
+        Button btn_update = view.findViewById(R.id.update);
 
-        bundle = getArguments();
+        Bundle bundle = getArguments();
 
         String answerA= bundle.getString("answerA");
         String answerB= bundle.getString("answerB");
         String answerC= bundle.getString("answerC");
         String answerD= bundle.getString("answerD");
-        String question=bundle.getString("Question");
+        String question= bundle.getString("Question");
         String correct= bundle.getString("correct");
         final long id= bundle.getLong("ID");
-        final long id_inChat = bundle.getLong("IDInChat");
+        final long list = bundle.getLong("LIST");
 
         textA.setText(answerA);
         textB.setText(answerB);
@@ -93,13 +70,13 @@ public class multipleFragment extends Fragment {
         btn_delete.setOnClickListener(view15 -> {
             if(isTablet){
                 CreateQuiz createQuiz=(CreateQuiz)getActivity();
-                createQuiz.deleteForTablet(id,id_inChat);
+                createQuiz.deleteForTablet(id,list);
                 getFragmentManager().beginTransaction().remove(multipleFragment.this).commit();
             }else{
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("action", 1);
-                Intent deleteID = resultIntent.putExtra("DeleteID", id);
-                resultIntent.putExtra("IDInChat", id_inChat);
+                resultIntent.putExtra("choice", 1);
+                Intent deleteID = resultIntent.putExtra("deleteID", id);
+                resultIntent.putExtra("LIST", list);
                 getActivity().setResult(Activity.RESULT_OK, resultIntent);
                 getActivity().finish();
             }
@@ -115,24 +92,23 @@ public class multipleFragment extends Fragment {
 
             if (isTablet) {
                 CreateQuiz create = (CreateQuiz) getActivity();
-                create.deleteForTablet(id, id_inChat);
+                create.deleteForTablet(id, list);
                 create.updateForTablet(newA, newB, newC, newD, newQuestion, newCorrect);
                 getFragmentManager().beginTransaction().remove(multipleFragment.this).commit();
             } else {
                 Intent intent = new Intent();
-                intent.putExtra("action", 2);
-                intent.putExtra("Question",newQuestion);
+                intent.putExtra("choice", 2);
                 intent.putExtra("answerA", newA);
                 intent.putExtra("answerB", newB);
                 intent.putExtra("answerC", newC);
                 intent.putExtra("answerD", newD);
+                intent.putExtra("Question",newQuestion);
                 intent.putExtra("correct", newCorrect);
                 intent.putExtra("UpdateID", id);
-                intent.putExtra("IDInChat", id_inChat);
+                intent.putExtra("LIST", list);
                 getActivity().setResult(Activity.RESULT_OK, intent);
                 getActivity().finish();
             }
-
         });
         return view;
     }

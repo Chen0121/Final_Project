@@ -6,28 +6,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class Function extends AppCompatActivity {
 
-    Button btn_import;
-    Button btn_create;
-    Button btn_stat;
-    Button btn_quit;
+    String parse_query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multiple__choice__quiz__creater);
-        btn_import=findViewById(R.id.btn_import);
-        btn_create=findViewById(R.id.btn_create);
-        btn_stat=findViewById(R.id.btn_stat);
-        btn_quit=findViewById(R.id.btn_quit);
+        setContentView(R.layout.activity_multiple_choice_quiz_creater);
 
-//        btn_import.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        Button btn_import = (Button)findViewById(R.id.btn_import);
+        Button btn_create = (Button)findViewById(R.id.btn_create);
+        Button btn_stat   = (Button)findViewById(R.id.btn_stat);
+        Button btn_quit   = (Button)findViewById(R.id.btn_quit);
+
+        btn_import.setOnClickListener((View v) -> {
+            QuizQuery query=new QuizQuery();
+            parse_query="http://torunski.ca/CST2335/QuizInstance.xml";
+            query.execute(parse_query);
+        });
 
         btn_create.setOnClickListener(v -> {
             Intent intent_c=new Intent(Function.this,CreateQuiz.class);
