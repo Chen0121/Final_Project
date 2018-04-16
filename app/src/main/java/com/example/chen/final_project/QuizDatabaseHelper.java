@@ -7,18 +7,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class QuizDatabaseHelper extends SQLiteOpenHelper {
-    private static final int db_version = 1;
+    private static final int db_version = 2;
     private static final String db_name = "Quiz.db";
     public static final String table_name = "Quiz";
-    public static final String KEY_ID = "id";
-    public static final String KEY_Question = "question";
-    public static final String KEY_Correct = "correctAnswer";
+    public static final String KEY_ID = "ID";
+    public static final String KEY_Question = "Question";
+    public static final String KEY_Correct = "correct";
     public static final String KEY_A = "AnswerA";
     public static final String KEY_B = "AnswerB";
     public static final String KEY_C = "AnswerC";
     public static final String KEY_D = "AnswerD";
-    public static final String KEY_NUM = "numeric";
-    public static final String KEY_PRE = "precision";
+//    public static final String KEY_TYPE = "type";
 
 
     QuizDatabaseHelper(Context ctx) {
@@ -31,7 +30,8 @@ public class QuizDatabaseHelper extends SQLiteOpenHelper {
             Log.i("QuizDatabaseHelper", "onCreate");
             db.execSQL("CREATE TABLE " + table_name + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + KEY_Question + " text, " + KEY_Correct + " text, " + KEY_A + " text, " + KEY_B + " text, "
-                    + KEY_C + " text, " + KEY_D+" text, "+KEY_NUM + " DECIMAL(10,5), "+ KEY_PRE + " INTEGER); ");
+                    + KEY_C + " text, " + KEY_D+ " text);");
+
         } catch (SQLException e) {
             Log.e("QuizDatabaseHelper", e.getMessage());
         }

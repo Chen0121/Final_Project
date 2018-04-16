@@ -7,9 +7,6 @@ public class multipleQuestion extends Question {
     private String answerD;
     private String correct;
 
-    public multipleQuestion(){
-
-    }
 
     public multipleQuestion(String answerA, String answerB, String answerC, String answerD, String question, String correct){
         setAnswerA(answerA);

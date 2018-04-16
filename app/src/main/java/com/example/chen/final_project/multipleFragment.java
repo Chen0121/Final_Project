@@ -23,7 +23,6 @@ public class multipleFragment extends Fragment {
     private EditText textD;
     private EditText multipleQuestion;
     private EditText multipleCorrect;
-    private ArrayList<Question> questionArray = new ArrayList<>();
     private boolean isTablet;
 
     @Override
@@ -50,11 +49,10 @@ public class multipleFragment extends Fragment {
         Button btn_update = view.findViewById(R.id.update);
 
         Bundle bundle = getArguments();
-        String questionType = bundle.getString("QuestionType");
-        String answerA= bundle.getString("answerA");
-        String answerB= bundle.getString("answerB");
-        String answerC= bundle.getString("answerC");
-        String answerD= bundle.getString("answerD");
+        String answerA= bundle.getString("AnswerA");
+        String answerB= bundle.getString("AnswerB");
+        String answerC= bundle.getString("AnswerC");
+        String answerD= bundle.getString("AnswerD");
         String question= bundle.getString("Question");
         String correct= bundle.getString("correct");
         final long id= bundle.getLong("ID");
@@ -98,13 +96,12 @@ public class multipleFragment extends Fragment {
             } else {
                 Intent intent = new Intent();
                 intent.putExtra("choice", 2);
-                intent.putExtra("answerA", newA);
-                intent.putExtra("answerB", newB);
-                intent.putExtra("answerC", newC);
-                intent.putExtra("answerD", newD);
+                intent.putExtra("AnswerA", newA);
+                intent.putExtra("AnswerB", newB);
+                intent.putExtra("AnswerC", newC);
+                intent.putExtra("AnswerD", newD);
                 intent.putExtra("Question",newQuestion);
                 intent.putExtra("correct", newCorrect);
-                intent.putExtra("QuestionType", "multiple");
                 intent.putExtra("UpdateID", id);
                 intent.putExtra("LIST", list);
                 getActivity().setResult(Activity.RESULT_OK, intent);

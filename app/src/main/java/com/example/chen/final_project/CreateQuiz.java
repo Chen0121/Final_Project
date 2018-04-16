@@ -3,19 +3,17 @@ package com.example.chen.final_project;
 import android.app.Activity ;
 import android.content.ContentValues ;
 import android.content.Context ;
-import android.content.DialogInterface ;
 import android.content.Intent ;
 import android.database.Cursor ;
 import android.database.sqlite.SQLiteDatabase ;
 import android.support.v7.app.AlertDialog ;
 import android.support.v7.app.AppCompatActivity ;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View ;
 import android.view.ViewGroup ;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button ;
-import android.widget.CheckBox;
 import android.widget.EditText ;
 import android.widget.ListView ;
 import android.widget.TextView ;
@@ -30,50 +28,45 @@ public class CreateQuiz extends AppCompatActivity {
     private QuizDatabaseHelper dbHelper = new QuizDatabaseHelper(this);
     private SQLiteDatabase db;
     private boolean isTablet;
-    private boolean isTrue=true;
     private Question Question;
     private ArrayList<Question> questionArray = new ArrayList<>();
     private QuestionAdapter questionAdapter;
-    private Bundle  bundle;
-
+    private ListView list_multiple;
+    //    private boolean isTrue=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_quiz);
         db = dbHelper.getWritableDatabase();
-        bundle=new Bundle();
         isTablet = (findViewById(R.id.frame_layout) != null);
-        ListView list_multiple = findViewById(R.id.list_1);
+        list_multiple= findViewById(R.id.list_1);
 
         Button btn_multiple = findViewById(R.id.button_multiple);
-        Button btn_tf=findViewById(R.id.button_tf);
-       
+//        Button btn_tf=findViewById(R.id.button_tf);
+
         questionAdapter = new QuestionAdapter(this);
         list_multiple.setAdapter(questionAdapter);
 
         query = "SELECT * FROM " + QuizDatabaseHelper.table_name + ";";
         cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
-        Log.i("here","1");
         while (!cursor.isAfterLast()) {
-            Log.i("here","2");
-            if(bundle.getString("QuestionType").equals("multiple")) {
-                Log.i("here","3");
-                String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
-                String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
-                String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
-                String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
-                String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
-                String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
-                Question = new multipleQuestion(answerA, answerB, answerC, answerD, question, correct);
-            }else if (bundle.getString("QuestionType").equals("tf")) {
-                String que = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
-                boolean answer = cursor.getInt(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct)) == 1;
-                Question = new tfQuestion(answer, que);
-            }
-//            else if (bundle.getString("QuestionType").equals("numeric")){
-//
+//            String type =cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_TYPE));
+//            if(type.equals("m")) {
+            String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
+            String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
+            String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
+            String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
+            String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+            String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
+            Question = new multipleQuestion(answerA, answerB, answerC, answerD, question, correct);
+//            }else if (type.equals("tf")) {
+//                String que = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+//                boolean answer = cursor.getInt(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct)) == 1;
+//                Question = new tfQuestion(answer, que);
 //            }
+
+//            else if (bundle.getString("QuestionType").equals("numeric")){
             questionArray.add(Question);
             cursor.moveToNext();
         }
@@ -107,11 +100,11 @@ public class CreateQuiz extends AppCompatActivity {
                 cv.put(KEY_D, ansD);
                 cv.put(KEY_Question, que);
                 cv.put(KEY_Correct, correct);
+//                cv.put(KEY_TYPE, "m");
 
                 db.insert(table_name, "", cv);
                 query = "SELECT * FROM " + table_name + ";";
                 cursor = db.rawQuery(query, null);
-
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
             });
@@ -121,43 +114,46 @@ public class CreateQuiz extends AppCompatActivity {
             dialog.show();
         });
 
-        btn_tf.setOnClickListener((View e) -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
-            final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.tf_layout, null);
-            builder.setView(view);
-            builder.setPositiveButton(R.string.ADD_tf, (DialogInterface dialog, int id) -> {
-                EditText question = view.findViewById(R.id.tf_fragment);
-                CheckBox checkA=view.findViewById(R.id.A_f);
-                CheckBox checkB=view.findViewById(R.id.B_f);
-                if(checkA.isChecked()){
-                    isTrue=true;
-                }else if(checkB.isChecked()) {
-                    isTrue = false;
-                }
-                String que = question.getText().toString();
-                tfQuestion tfQuestion=new tfQuestion(isTrue,que);
-                questionArray.add(tfQuestion);
+//        btn_tf.setOnClickListener((View e) -> {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
+//            final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.tf_layout, null);
+//            builder.setView(view);
+//            builder.setPositiveButton(R.string.ADD_tf, (DialogInterface dialog, int id) -> {
+//                EditText question = view.findViewById(R.id.tf_fragment);
+//                CheckBox checkA=view.findViewById(R.id.A_f);
+//                CheckBox checkB=view.findViewById(R.id.B_f);
+//                if(checkA.isChecked()){
+//                    isTrue=true;
+//                }else if(checkB.isChecked()) {
+//                    isTrue = false;
+//                }
+//                String que = question.getText().toString();
+//                tfQuestion tfQuestion=new tfQuestion(isTrue,que);
+//                questionArray.add(tfQuestion);
+//
+//                ContentValues cv = new ContentValues();
+//                cv.put(KEY_Question, que);
+//                cv.put(KEY_Correct, isTrue);
+//                cv.put(KEY_TYPE, "tf");
+//
+//                db.insert(table_name, "", cv);
+//                query = "SELECT * FROM " + table_name + ";";
+//                cursor = db.rawQuery(query, null);
+//
+//                cursor.moveToFirst();
+//                questionAdapter.notifyDataSetChanged();
+//                });
+//                builder.setNegativeButton(R.string.CANCEL_multiple, (dialog, id) -> {
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//            });
 
-                ContentValues cv = new ContentValues();
-                cv.put(KEY_Question, que);
-                cv.put(KEY_Correct, isTrue);
-
-                db.insert(table_name, "", cv);
-                query = "SELECT * FROM " + table_name + ";";
-                cursor = db.rawQuery(query, null);
-
-                cursor.moveToFirst();
-                questionAdapter.notifyDataSetChanged();
-                });
-                builder.setNegativeButton(R.string.CANCEL_multiple, (dialog, id) -> {
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            });
-
-        list_multiple.setOnItemClickListener((adapterView, view, position, id) -> {
-            int answer = 0;
-            if (bundle.getString("QuestionType").equals("multiple")) {
+        list_multiple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//            int answer = 0;
+//            if (bundle.getString("QuestionType").equals("multiple")) {
                 String a1 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerA();
                 String a2 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerB();
                 String a3 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerC();
@@ -167,11 +163,12 @@ public class CreateQuiz extends AppCompatActivity {
                 long id_inList = questionAdapter.getId(position);
                 multipleFragment Fragment = new multipleFragment();
 
-                bundle.putString("QuestionType", "multiple");
-                bundle.putString("answerA", a1);
-                bundle.putString("answerB", a2);
-                bundle.putString("answerC", a3);
-                bundle.putString("answerD", a4);
+//                bundle.putString("QuestionType", "multiple");
+                Bundle bundle = new Bundle();
+                bundle.putString("AnswerA", a1);
+                bundle.putString("AnswerB", a2);
+                bundle.putString("AnswerC", a3);
+                bundle.putString("AnswerD", a4);
                 bundle.putString("Question", q);
                 bundle.putString("correct", c);
                 bundle.putLong("LIST", id_inList);
@@ -187,44 +184,44 @@ public class CreateQuiz extends AppCompatActivity {
                     multiDetails.putExtra("Question", bundle);
                     startActivityForResult(multiDetails, 1, bundle);
                 }
-            } else if (bundle.getString("QuestionType").equals("tf")) {
-                String q = questionAdapter.getItem(position).getQuestion();
-                Boolean isR = ((tfQuestion) questionAdapter.getItem(position)).isRight();
-                if (isR=true) {
-                    answer= 1;
-                } else if (isR=false) {
-                    answer = 2;
-                }
-                long id_inList = questionAdapter.getId(position);
-                
-                tfFragment Fragment = new tfFragment();
-                Bundle bundle=new Bundle();
-                bundle.putString("QuestionType", "tf");
-                bundle.putString("Question", q);
-                bundle.putString("answer", String.valueOf(answer));
-                bundle.putLong("LIST", id_inList);
-                bundle.putLong("ID", id);
-
-                if (isTablet) {
-                    Fragment.setArguments(bundle);
-                    Fragment.setIsTablet(true);
-                    getFragmentManager().beginTransaction().replace(R.id.frame_layout, Fragment).commit();
-                } else {
-                    Fragment.setIsTablet(false);
-                    Intent tfDetails = new Intent(CreateQuiz.this, tfDetails.class);
-                    tfDetails.putExtra("Question", bundle);
-                    startActivityForResult(tfDetails, 1, bundle);
-                }
-
-            }
+//            } else if (bundle.getString("QuestionType").equals("tf")) {
+//                Log.i("here",bundle.getString("QuestionType"));
+//                String q = questionAdapter.getItem(position).getQuestion();
+//                Boolean isR = ((tfQuestion) questionAdapter.getItem(position)).isRight();
+//                if (isR=true) {
+//                    answer= 1;
+//                } else if (isR=false) {
+//                    answer = 2;
+//                }
+//                long id_inList = questionAdapter.getId(position);
+//
+//                tfFragment Fragment = new tfFragment();
+//                Bundle bundle=new Bundle();
+//                bundle.putString("QuestionType", "tf");
+//                bundle.putString("Question", q);
+//                bundle.putString("answer", String.valueOf(answer));
+//                bundle.putLong("LIST", id_inList);
+//                bundle.putLong("ID", id);
+//
+//                if (isTablet) {
+//                    Fragment.setArguments(bundle);
+//                    Fragment.setIsTablet(true);
+//                    getFragmentManager().beginTransaction().replace(R.id.frame_layout, Fragment).commit();
+//                } else {
+//                    Fragment.setIsTablet(false);
+//                    Intent tfDetails = new Intent(CreateQuiz.this, tfDetails.class);
+//                    tfDetails.putExtra("Question", bundle);
+//                    startActivityForResult(tfDetails, 1, bundle);
+//                }
+//
+//            }
 //            else if(){
 //
 //
 //        }
-
+            }
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -252,23 +249,23 @@ public class CreateQuiz extends AppCompatActivity {
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
 
-                if (bundle.getString("QuestionType").equals("multiple")) {
-                    String ans1 = b.getString("answerA");
-                    String ans2 = b.getString("answerB");
-                    String ans3 = b.getString("answerC");
-                    String ans4 = b.getString("answerD");
+//                if (bundle.getString("QuestionType").equals("multiple")) {
+                    String ans1 = b.getString("AnswerA");
+                    String ans2 = b.getString("AnswerB");
+                    String ans3 = b.getString("AnswerC");
+                    String ans4 = b.getString("AnswerD");
                     String question = b.getString("Question");
                     String correct = b.getString("correct");
-
                     updateForTablet(ans1, ans2, ans3, ans4, question, correct);
-                }else if(bundle.getString("QuestionType").equals("tf")){
-                    String q = bundle.getString("Question");
-                    int ans = bundle.getInt("answer");
-                    updatetf(q, ans);
                 }
-            }
+//                }else if(bundle.getString("QuestionType").equals("tf")){
+//                    String q = bundle.getString("Question");
+//                    int ans = bundle.getInt("answer");
+//                    updatetf(q, ans);
+//                }
+                }
         }
-    }
+
 
     public void updateForTablet(String ans1, String ans2, String ans3, String ans4, String question, String correct) {
         String answer1 = ans1;
@@ -296,27 +293,27 @@ public class CreateQuiz extends AppCompatActivity {
         questionAdapter.notifyDataSetChanged();
     }
 
-    public void updatetf(String question,int answer) {
-        String que = question;
-        int ans = answer;
+//    public void updatetf(String question,int answer) {
+//        String que = question;
+//        int ans = answer;
+//
+//        Question q = new tfQuestion(ans==1,que);
+//        questionArray.add(q);
+//
+//        ContentValues cv = new ContentValues();
+//        cv.put(KEY_Question, que);
+//        cv.put(KEY_Correct, ans);
+//
+//        db.insert(table_name,"",cv);
+//        query = "SELECT * FROM " + table_name + ";";
+//        cursor = db.rawQuery(query, null);
+//        cursor.moveToFirst();
+//        questionAdapter.notifyDataSetChanged();
+//    }
 
-        Question q = new tfQuestion(ans==1,que);
-        questionArray.add(q);
-
-        ContentValues cv = new ContentValues();
-        cv.put(KEY_Question, que);
-        cv.put(KEY_Correct, ans);
-
-        db.insert(table_name,"",cv);
-        query = "SELECT * FROM " + table_name + ";";
-        cursor = db.rawQuery(query, null);
-        cursor.moveToFirst();
-        questionAdapter.notifyDataSetChanged();
-    }
-
-    public void deleteForTablet(long idInDatabase, long idInList) {
+    public void deleteForTablet(long idDB, long idInList) {
         String query;
-        long id = idInDatabase;
+        long id = idDB;
         long id_inList = idInList;
         db.delete(table_name, KEY_ID + " = ?", new String[]{Long.toString(id)});
         questionArray.remove((int) id_inList);
@@ -354,7 +351,7 @@ public class CreateQuiz extends AppCompatActivity {
         @Override
         public long getItemId(int position) {
             cursor.moveToPosition(position);
-            return cursor.getLong(cursor.getColumnIndex("id"));
+            return cursor.getLong(cursor.getColumnIndex("ID"));
         }
 
         @Override
