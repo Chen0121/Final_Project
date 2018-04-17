@@ -7,42 +7,45 @@
     <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="  You can choose questions here or add new questions.  "/>
+        android:layout_height="31dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="28dp"
+        android:text="          CHOOSE questions from here or ADD new questions  " />
 
     <ListView
         android:id="@+id/list_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_tf"
+        android:layout_height="389dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/question" />
 
     <Button
         android:id="@+id/button_numeric"
         android:layout_width="130dp"
-        android:layout_height="wrap_content"
+        android:layout_height="81dp"
         android:layout_alignParentBottom="true"
-        android:text="Numeric"/>
+        android:text="ADD      Numeric" />
 
     <Button
         android:id="@+id/button_tf"
         android:layout_width="127dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_alignEnd="@+id/button_multiple"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginEnd="130dp"
         android:layout_marginStart="127dp"
-        android:text="True/False" />
+        android:text="ADD                    True/False" />
 
     <Button
         android:id="@+id/button_multiple"
         android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:text="Multiple" />
+        android:layout_alignParentEnd="true"
+        android:text="ADD         Multiple" />
 </RelativeLayout>
 
 

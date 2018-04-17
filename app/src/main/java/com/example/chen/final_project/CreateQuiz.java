@@ -58,6 +58,7 @@ public class CreateQuiz extends AppCompatActivity {
 
         Button btn_multiple = findViewById(R.id.button_multiple);
         Button btn_tf=findViewById(R.id.button_tf);
+        Button btn_num=findViewById(R.id.button_numeric);
 
         questionAdapter = new QuestionAdapter(this);
         list_multiple.setAdapter(questionAdapter);
@@ -79,9 +80,16 @@ public class CreateQuiz extends AppCompatActivity {
                 String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
                 boolean answer=(cursor.getInt(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct))==1);
                 Question = new tfQuestion(answer, question);
+            } else if (cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_TYPE)).equals("numeric")){
+                String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
+                String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
+                String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
+                String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
+                String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+                String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
+                String accuracy=cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Accuracy));
+                Question = new numQuestion(answerA, answerB, answerC, answerD, question, correct, accuracy);
             }
-
-//            else if (bundle.getString("QuestionType").equals("numeric")){
             questionArray.add(Question);
             cursor.moveToNext();
         }
@@ -165,6 +173,52 @@ public class CreateQuiz extends AppCompatActivity {
                 dialog.show();
             });
 
+        btn_num.setOnClickListener(e -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
+            final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.numeric_layout, null);
+            builder.setView(view);
+            builder.setPositiveButton(R.string.ADD_multiple, (dialog, id) -> {
+                EditText a = view.findViewById(R.id.txt_A);
+                EditText b = view.findViewById(R.id.txt_B);
+                EditText c = view.findViewById(R.id.txt_C);
+                EditText d = view.findViewById(R.id.txt_D);
+                EditText question = view.findViewById(R.id.question_fragment);
+                EditText cor = view.findViewById(R.id.correct);
+                EditText ac=view.findViewById(R.id.accuracyline);
+
+                String ansA = a.getText().toString();
+                String ansB = b.getText().toString();
+                String ansC = c.getText().toString();
+                String ansD = d.getText().toString();
+                String que = question.getText().toString();
+                String correct = cor.getText().toString();
+                String accuracy=ac.getText().toString();
+
+                numQuestion nQuestion = new numQuestion(ansA, ansB, ansC, ansD, que, correct,accuracy);
+                questionArray.add(nQuestion);
+
+                ContentValues cv = new ContentValues();
+                cv.put(KEY_A, ansA);
+                cv.put(KEY_B, ansB);
+                cv.put(KEY_C, ansC);
+                cv.put(KEY_D, ansD);
+                cv.put(KEY_Question, que);
+                cv.put(KEY_Correct, correct);
+                cv.put(KEY_Accuracy,accuracy);
+                cv.put(KEY_TYPE, "numeric");
+
+                db.insert(table_name, "", cv);
+                query = "SELECT * FROM " + table_name + ";";
+                cursor = db.rawQuery(query, null);
+                cursor.moveToFirst();
+                questionAdapter.notifyDataSetChanged();
+            });
+            builder.setNegativeButton(R.string.CANCEL_multiple, (dialog, id) -> {
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
+
         list_multiple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -230,7 +284,40 @@ public class CreateQuiz extends AppCompatActivity {
                     tfDetails.putExtra("Question", bundle);
                     startActivityForResult(tfDetails, 1, bundle);
                 }
-            }
+            } else if (questionAdapter.getItem(position).getType().equals("numeric")) {
+                    String a1 = ((numQuestion) questionAdapter.getItem(position)).getAnswerA();
+                    String a2 = ((numQuestion) questionAdapter.getItem(position)).getAnswerB();
+                    String a3 = ((numQuestion) questionAdapter.getItem(position)).getAnswerC();
+                    String a4 = ((numQuestion) questionAdapter.getItem(position)).getAnswerD();
+                    String q = questionAdapter.getItem(position).getQuestion();
+                    String c = ((numQuestion) questionAdapter.getItem(position)).getCorrect();
+                    String ac=((numQuestion) questionAdapter.getItem(position)).getAccuracy();
+                    long id_inList = questionAdapter.getId(position);
+                    numFragment Fragment = new numFragment();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("AnswerA", a1);
+                    bundle.putString("AnswerB", a2);
+                    bundle.putString("AnswerC", a3);
+                    bundle.putString("AnswerD", a4);
+                    bundle.putString("Question", q);
+                    bundle.putString("correct", c);
+                    bundle.putString("accuracy",ac);
+                    bundle.putLong("LIST", id_inList);
+                    bundle.putLong("ID", id);
+                    bundle.putString("type","numeric");
+
+                    if (isTablet) {
+                        Fragment.setArguments(bundle);
+                        Fragment.setIsTablet(true);
+                        getFragmentManager().beginTransaction().replace(R.id.frame_layout, Fragment).commit();
+                    } else {
+                        Fragment.setIsTablet(false);
+                        Intent multiDetails = new Intent(CreateQuiz.this, multipleDetails.class);
+                        multiDetails.putExtra("Question", bundle);
+                        startActivityForResult(multiDetails, 1, bundle);
+                    }
+                }
             }
         });
     }
@@ -267,12 +354,21 @@ public class CreateQuiz extends AppCompatActivity {
                     String ans3 = b.getString("AnswerC");
                     String ans4 = b.getString("AnswerD");
                     String question = b.getString("Question");
-                    String correct = b.getString("correct");
+                    String correct  = b.getString("correct");
                     updateForTablet(ans1, ans2, ans3, ans4, question, correct);
                 } else if (b.getString("type").equals("tf")) {
                     String question = b.getString("Question");
-                    String answer = b.getString("answer");
+                    String answer   = b.getString("answer");
                     updateForTF(question, answer);
+                }else if (b.getString("type").equals("numeric")) {
+                    String ans1 = b.getString("AnswerA");
+                    String ans2 = b.getString("AnswerB");
+                    String ans3 = b.getString("AnswerC");
+                    String ans4 = b.getString("AnswerD");
+                    String question = b.getString("Question");
+                    String correct  = b.getString("correct");
+                    String accuracy = b.getString("accuracy");
+                    updateForNum(ans1, ans2, ans3, ans4, question, correct,accuracy);
                 }
             }
         }
@@ -297,6 +393,34 @@ public class CreateQuiz extends AppCompatActivity {
         cv.put(KEY_D, answer4);
         cv.put(KEY_Question, que);
         cv.put(KEY_Correct, c);
+
+        db.insert(table_name, "", cv);
+        query = "SELECT * FROM " + table_name + ";";
+        cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        questionAdapter.notifyDataSetChanged();
+    }
+
+    public void updateForNum(String ans1, String ans2, String ans3, String ans4, String question, String correct, String accuracy) {
+        String answer1 = ans1;
+        String answer2 = ans2;
+        String answer3 = ans3;
+        String answer4 = ans4;
+        String que = question;
+        String c = correct;
+        String acc=accuracy;
+
+        Question q = new numQuestion(answer1, answer2, answer3, answer4, que, c, acc);
+        questionArray.add(q);
+
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_A, answer1);
+        cv.put(KEY_B, answer2);
+        cv.put(KEY_C, answer3);
+        cv.put(KEY_D, answer4);
+        cv.put(KEY_Question, que);
+        cv.put(KEY_Correct, c);
+        cv.put(KEY_Accuracy,acc);
 
         db.insert(table_name, "", cv);
         query = "SELECT * FROM " + table_name + ";";
@@ -363,6 +487,7 @@ public class CreateQuiz extends AppCompatActivity {
 
         @Override
         public long getItemId(int position) {
+            Log.i("Why", "ARE WE HERE?!?!?!?!?!?!?!?!");
             cursor.moveToPosition(position);
             return cursor.getLong(cursor.getColumnIndex("ID"));
         }
