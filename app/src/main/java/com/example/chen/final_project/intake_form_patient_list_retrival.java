@@ -35,19 +35,6 @@ public class intake_form_patient_list_retrival extends Activity {
     ProgressBar progressBar;
     TextView temp;
 
-//    TextView type;
-//    TextView name;
-//    TextView address;
-//    TextView birthday;
-//    TextView phone;
-//    TextView healthcard;
-//    TextView description;
-//    TextView prevsurgery;
-//    TextView allergies;
-//    TextView glassesbought;
-//    TextView glassesstore;
-//    TextView benefit;
-//    TextView hadbraces;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

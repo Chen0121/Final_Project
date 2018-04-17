@@ -85,10 +85,8 @@ public class Intake_Form_Add_Doctor_Patient extends Activity {
                 intakeForm_AddPatientDescrption_Doctor.setText("");
                 intakeForm_AddPatientAllergies_Doctor.setText("");
 
-                Intent returnIntent = new Intent();
-                setResult(RESULT_OK,returnIntent);
-
-
+                Intent returnIntent = new Intent(Intake_Form_Add_Doctor_Patient.this, Patient_Intake_form.class);
+                startActivity(returnIntent);
                 finish();
             }
         });

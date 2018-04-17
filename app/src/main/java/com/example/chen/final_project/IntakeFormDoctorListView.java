@@ -9,18 +9,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class IntakeFormDoctorListView extends Activity {
 
@@ -31,7 +28,7 @@ public class IntakeFormDoctorListView extends Activity {
     PatientDatabaseHelper patientDatabaseHelper;
     SQLiteDatabase db;
     Cursor cursor;
-    ArrayList<Intake_Form_Patient_Info> patientInfoArraylist;
+    ArrayList<Intake_Form_Patient_Info> patientInfoArraylist =null;
     PatientListAdapter patientListAdapter;
 
 
@@ -50,12 +47,17 @@ public class IntakeFormDoctorListView extends Activity {
         patientInfoArraylist = new ArrayList<>(40);
         cursor =db.query(false,
                     PatientDatabaseHelper.TABLE_NAME,
-                    new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS},
-                    null,null,null,null,null,null);
+                    new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
+                            PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
+                            PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
+                            PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, PatientDatabaseHelper.COLUMN_ALLERGIES},
+                    "COL_PREVIOUSSURGERY IS NOT ? AND COL_ALLERGIES IS NOT ?",
+                    new String[]{"NULL","NULL"},null,null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             String patientName = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_NAME));
             String patientAddress = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ADDRESS));
+
             Intake_Form_Patient_Info object_patient_info = new Intake_Form_Patient_Info(patientName,patientAddress);
 
             patientInfoArraylist.add(object_patient_info);// add information to arraylist element.
@@ -69,6 +71,47 @@ public class IntakeFormDoctorListView extends Activity {
         listViewPatientList =(ListView)findViewById(R.id.IntakeForm_PatientListView_Doctor);
         patientListAdapter = new PatientListAdapter(this);
         listViewPatientList.setAdapter(patientListAdapter);
+        listViewPatientList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String dbid = patientListAdapter.getItemID(position);
+                int listViewPosition = patientListAdapter.getId(position);
+
+                cursor = db.rawQuery("SELECT * FROM "+ PatientDatabaseHelper.TABLE_NAME + " WHERE " + PatientDatabaseHelper.COLUMN_ID + " = "+ dbid,null);
+                cursor.moveToFirst();
+
+
+                String patientID = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ID));
+                String patientName = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_NAME));
+                String patientAddress =cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ADDRESS));
+                String patientBirthDay =cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_BIRTHDAY));
+                String patientPhone =cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_PHONE));
+                String patientHealthcard = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_HEALTHCARD));
+                String patientDescription = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_DESCRIPTION));
+                String patientSurgery = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY));
+                String patientAllergies = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ALLERGIES));
+
+                Bundle patientBundle = new Bundle();
+
+                patientBundle.putInt("Patient_Listview_Position",listViewPosition);
+                patientBundle.putString("Patient_ID",patientID);
+                patientBundle.putString("Patient_Name",patientName);
+                patientBundle.putString("Patient_Address",patientAddress);
+                patientBundle.putString("Patient_Birthday",patientBirthDay);
+                patientBundle.putString("Patient_Phone",patientPhone);
+                patientBundle.putString("Patient_Healthcard",patientHealthcard);
+                patientBundle.putString("Patient_Description",patientDescription);
+                patientBundle.putString("Patient_SP1",patientSurgery);
+                patientBundle.putString("Patient_SP2",patientAllergies);
+
+
+                Intent intent = new Intent(IntakeFormDoctorListView.this, Intake_Form_Empty_Detail.class);
+                intent.putExtra("PatientInfo", patientBundle);
+                startActivityForResult(intent,12,patientBundle);
+
+            }
+        });
 
         // add a new Patient
         buttonAddPatient = (Button)findViewById(R.id.buttonAddPatient_Doctor);
@@ -81,7 +124,6 @@ public class IntakeFormDoctorListView extends Activity {
         });
 
     }
-
 
     private class PatientListAdapter extends ArrayAdapter<String>{
 
@@ -110,21 +152,20 @@ public class IntakeFormDoctorListView extends Activity {
 
         @Override
         public String getItem(int position){
-            return null;
+            return patientInfoArraylist.get(position).getPaient_id();
         }
 
-        public long getId(int position){
+        public String getItemID(int position){
+            String query= "Select * From "+ PatientDatabaseHelper.TABLE_NAME+";";
+            cursor = db.rawQuery(query, null);
+            cursor.moveToPosition(position);
+            return cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ID));
+        }
+
+
+        public int getId(int position){
             return position;
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        patientListAdapter = new PatientListAdapter(this);
-        listViewPatientList.setAdapter(patientListAdapter);
-        listViewPatientList.invalidate();
     }
 
     protected void onDestroy() {
@@ -134,7 +175,24 @@ public class IntakeFormDoctorListView extends Activity {
         db.close();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode ==12 && resultCode ==12){
+            Bundle retrival;
+            retrival = data.getExtras();
 
+            String dbid = retrival.getString("IDforDbDeletion");
+            long listviewPosition = retrival.getLong("returned_ListViewPosition");
+            String query = "DELETE FROM " + PatientDatabaseHelper.TABLE_NAME + " WHERE " + PatientDatabaseHelper.COLUMN_ID + " = "+ dbid;
+            db.execSQL(query);
+            patientInfoArraylist.remove((int)listviewPosition);
+
+            patientListAdapter.notifyDataSetChanged();
+            Log.i("DELETED A RECORD","Record deleted");
+        }
+
+
+    }
 
 
 }

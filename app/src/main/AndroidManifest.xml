@@ -28,7 +28,8 @@
         <activity
             android:name=".IntakeFormDoctorListView"
             android:label="@string/intakeForm_RegisterForDoctor" />
-        <activity android:name=".Intake_Form_Add_Doctor_Patient"></activity>
+        <activity android:name=".Intake_Form_Add_Doctor_Patient" />
+        <activity android:name=".Intake_Form_Empty_Detail"></activity>
     </application>
 
 </manifest>

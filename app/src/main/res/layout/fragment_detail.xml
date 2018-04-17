@@ -1,0 +1,134 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chen.final_project.DetailFragment">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_row="0"
+            android:layout_columnSpan="2"
+            android:text="@string/intakeForm_Patient_fragment"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_PN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_columnSpan="2"
+            android:hint="Patient Name"
+            android:focusable="false"/>
+
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_Address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_columnSpan="2"
+            android:hint="Patient Address"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_Birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_columnSpan="2"
+            android:hint="Patient Birthday"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_Phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="4"
+            android:layout_columnSpan="2"
+            android:hint="Patient Phone"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_Healthcard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="5"
+            android:layout_columnSpan="2"
+            android:hint="Patient Health Card"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="6"
+            android:layout_columnSpan="2"
+            android:hint="Patient Description"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_SP1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="7"
+            android:layout_columnSpan="2"
+            android:hint="Patient SP1"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/intakeform_PatientFragment_Item_SP2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="8"
+            android:layout_columnSpan="2"
+            android:hint="Patient SP2"
+            android:focusable="false"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="10"
+            android:layout_columnSpan="2"
+            android:id="@+id/commander">
+
+            <Button
+                android:id="@+id/IntakeForm_buttonUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="Update" />
+
+            <Button
+                android:id="@+id/IntakeForm_ButtonDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="11"
+            android:layout_columnSpan="2"
+            android:id="@+id/commander2">
+
+            <Button
+                android:id="@+id/IntakeForm_buttonConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:text="Confirm Update"/>
+        </LinearLayout>
+    </GridLayout>
+
+
+
+
+</FrameLayout>

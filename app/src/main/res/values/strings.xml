@@ -39,4 +39,11 @@
     <string name="intakeForm_PatientListActivity_benefit">Benefit:</string>
     <string name="intakeForm_PatientListActivity_hadbraces">HadBraces:</string>
     <string name="intakeForm_AddPatientToList">Add new Patient</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="intakeForm_Patient_fragment">Detailed Partient Information: </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
