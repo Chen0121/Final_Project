@@ -21,6 +21,7 @@
         <activity android:name=".GetStat" />
         <activity android:name=".multipleDetails" />
         <activity android:name=".Patient_Intake_form" />
+        <activity android:name=".tfDetails"/>
         <activity android:name=".Movie_Information" />
         <activity android:name=".OCTranspo_Bus_Route_App" />
         <activity android:name=".Function"></activity>

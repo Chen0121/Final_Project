@@ -11,7 +11,7 @@ public class tfDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.multiple_details);
 
-        Bundle bundle = getIntent().getBundleExtra("question");
+        Bundle bundle = getIntent().getBundleExtra("Question");
         tfFragment Fragment = new tfFragment();
         Fragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

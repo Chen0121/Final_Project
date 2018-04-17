@@ -8,6 +8,10 @@ public class multipleQuestion extends Question {
     private String correct;
 
 
+    public multipleQuestion(){
+        type="multipleChoice";
+    }
+
     public multipleQuestion(String answerA, String answerB, String answerC, String answerD, String question, String correct){
         setAnswerA(answerA);
         setAnswerB(answerB);
@@ -15,6 +19,7 @@ public class multipleQuestion extends Question {
         setAnswerD(answerD);
         setQuestion(question);
         setCorrect(correct);
+        type="multipleChoice";
     }
 
     public String getAnswerA(){

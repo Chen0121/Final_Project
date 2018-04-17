@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class QuizDatabaseHelper extends SQLiteOpenHelper {
-    private static final int db_version = 2;
+    private static final int db_version = 5;
     private static final String db_name = "Quiz.db";
     public static final String table_name = "Quiz";
     public static final String KEY_ID = "ID";
@@ -17,7 +17,7 @@ public class QuizDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_B = "AnswerB";
     public static final String KEY_C = "AnswerC";
     public static final String KEY_D = "AnswerD";
-//    public static final String KEY_TYPE = "type";
+    public static final String KEY_TYPE = "type";
 
 
     QuizDatabaseHelper(Context ctx) {
@@ -29,7 +29,7 @@ public class QuizDatabaseHelper extends SQLiteOpenHelper {
         try {
             Log.i("QuizDatabaseHelper", "onCreate");
             db.execSQL("CREATE TABLE " + table_name + "( " + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + KEY_Question + " text, " + KEY_Correct + " text, " + KEY_A + " text, " + KEY_B + " text, "
+                    + KEY_Question + " text, " + KEY_Correct + " text, "+ KEY_TYPE + " text, " + KEY_A + " text, " + KEY_B + " text, "
                     + KEY_C + " text, " + KEY_D+ " text);");
 
         } catch (SQLException e) {

@@ -88,6 +88,7 @@ public class multipleFragment extends Fragment {
             String newQuestion=multipleQuestion.getText().toString();
             String newCorrect =multipleCorrect.getText().toString();
 
+
             if (isTablet) {
                 CreateQuiz create = (CreateQuiz) getActivity();
                 create.deleteForTablet(id, list);
@@ -102,6 +103,7 @@ public class multipleFragment extends Fragment {
                 intent.putExtra("AnswerD", newD);
                 intent.putExtra("Question",newQuestion);
                 intent.putExtra("correct", newCorrect);
+                intent.putExtra("type","multipleChoice");
                 intent.putExtra("UpdateID", id);
                 intent.putExtra("LIST", list);
                 getActivity().setResult(Activity.RESULT_OK, intent);

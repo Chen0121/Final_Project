@@ -3,8 +3,8 @@ package com.example.chen.final_project;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
 
 
 public class Function extends AppCompatActivity {
@@ -21,11 +21,13 @@ public class Function extends AppCompatActivity {
         Button btn_stat   = (Button)findViewById(R.id.btn_stat);
         Button btn_quit   = (Button)findViewById(R.id.btn_quit);
 
-        btn_import.setOnClickListener((View v) -> {
-            QuizQuery query=new QuizQuery();
-            parse_query="http://torunski.ca/CST2335/QuizInstance.xml";
-            query.execute(parse_query);
-        });
+//        btn_import.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                CreateQuiz.QuizQuery query=new QuizQuery();
+//                query.execute();
+//            }
+//        });
 
         btn_create.setOnClickListener(v -> {
             Intent intent_c=new Intent(Function.this,CreateQuiz.class);
