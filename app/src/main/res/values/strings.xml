@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Final_Project</string>
+    <string name="CANCEL_multiple">CANCEL</string>
+    <string name="ADD_multiple">ADD</string>
+    <string name="ADD_tf">ADD</string>
+    <string name="CANCEL_tf">CANCEL</string>
+    <string name="False">False</string>
+    <string name="True">True</string>
+    <string name="question">question</string>
+    <string name="answera">answerA</string>
+    <string name="answerb">answerB</string>
+    <string name="answerc">answerC</string>
+    <string name="answerd">answerD</string>
+    <string name="accuracy">accuracy</string>
+    <string name="l">  longest question:</string>
+    <string name="tv">TextView</string>
+    <string name="av">average question length:</string>
+    <string name="sh">    shortest question:</string>
+    <string name="Import">You have imported quizzes into the system</string>
+    <string name="imp">import questions</string>
+    <string name="create_quiz">create a quiz</string>
+    <string name="quit">Quit</string>
+    <string name="sta">get statistics</string>
+    <string name="choose">          CHOOSE questions from here or ADD new questions  </string>
+    <string name="add">ADD      Numeric</string>
+    <string name="addtf">ADD                    True/False</string>
+    <string name="addnum">ADD         Multiple</string>
+    <string name="del">delete</string>
+    <string name="update">update</string>
+    <string name="q">question</string>
+    <string name="c">correct</string>
+    <string name="acc">accuracy</string>
+    <string name="tr">True</string>
+    <string name="fal">False</string>
+    <string name="ch">You have choose Quiz Creator.You can create or import (mc or true/false or numeric questions).</string>
 </resources>

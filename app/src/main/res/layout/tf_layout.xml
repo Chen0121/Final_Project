@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/q" />
+
+    <EditText
+        android:id="@+id/tf_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_below="@id/question"
+        android:layout_marginTop="37dp" />
+
+    <CheckBox
+        android:id="@+id/A_f"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="98dp"
+        android:text="@string/tr" />
+
+    <CheckBox
+        android:id="@+id/B_f"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/A_f"
+        android:layout_marginTop="141dp"
+        android:text="@string/fal" />
+
+</RelativeLayout>
