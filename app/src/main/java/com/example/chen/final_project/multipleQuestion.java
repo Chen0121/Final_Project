@@ -42,19 +42,19 @@ public class multipleQuestion extends Question {
         return correct;
     }
 
-    private void setAnswerA(String answerA){
+    public void setAnswerA(String answerA){
         this.answerA=answerA;
     }
 
-    private void setAnswerB(String answerB){
+    public void setAnswerB(String answerB){
         this.answerB=answerB;
     }
 
-    private void setAnswerC(String answerC){
+    public void setAnswerC(String answerC){
         this.answerC=answerC;
     }
 
-    private void setAnswerD(String answerD){
+    public void setAnswerD(String answerD){
         this.answerD=answerD;
     }
 

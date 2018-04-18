@@ -30,7 +30,8 @@ dependencies {
     compile 'com.android.support:design:27.1.0'
 
 }
-android { lintOptions { disable 'RestrictedApi' }
+android {
+    lintOptions { disable 'RestrictedApi' }
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8

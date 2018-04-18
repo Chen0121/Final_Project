@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginBottom="20dp"
-        android:text="question" />
+        android:text="@string/question" />
 
     <EditText
         android:id="@+id/tf_fragment"
@@ -26,7 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="45dp"
         android:layout_marginTop="98dp"
-        android:text="True" />
+        android:text="@string/True" />
 
     <CheckBox
         android:id="@+id/B_f"
@@ -35,6 +35,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/A_f"
         android:layout_marginTop="141dp"
-        android:text="False" />
+        android:text="@string/False" />
 
 </RelativeLayout>

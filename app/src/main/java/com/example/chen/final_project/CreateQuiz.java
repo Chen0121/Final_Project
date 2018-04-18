@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent ;
 import android.database.Cursor ;
 import android.database.sqlite.SQLiteDatabase ;
-import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog ;
 import android.support.v7.app.AppCompatActivity ;
 import android.os.Bundle;
@@ -20,19 +19,11 @@ import android.widget.Button ;
 import android.widget.CheckBox;
 import android.widget.EditText ;
 import android.widget.ListView ;
+import android.widget.ProgressBar;
 import android.widget.TextView ;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList ;
 
-import static android.provider.Contacts.SettingsColumns.KEY;
 import static com.example.chen.final_project.QuizDatabaseHelper.*;
 
 public class CreateQuiz extends AppCompatActivity {
@@ -45,8 +36,9 @@ public class CreateQuiz extends AppCompatActivity {
     private Question Question;
     private ArrayList<Question> questionArray = new ArrayList<>();
     private QuestionAdapter questionAdapter;
-    private ListView list_multiple;
     private Bundle bundle;
+    private ProgressBar progressBar;
+    private TextView bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +46,28 @@ public class CreateQuiz extends AppCompatActivity {
         setContentView(R.layout.create_quiz);
         db = dbHelper.getWritableDatabase();
         isTablet = (findViewById(R.id.frame_layout) != null);
-        list_multiple = findViewById(R.id.list_1);
+        ListView list_multiple = findViewById(R.id.list_1);
+
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        bar= (TextView) findViewById(R.id.bar);
+        new Thread(){
+            @Override
+            public void run() {
+                int i=0;
+                while(i<100){
+                    i++;
+                    try {
+                        Thread.sleep(80);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    final int j=i;
+                    progressBar.setProgress(i);
+                    runOnUiThread(() -> bar.setText(j+"%"));
+                }
+            }
+        }.start();
 
         Button btn_multiple = findViewById(R.id.button_multiple);
         Button btn_tf=findViewById(R.id.button_tf);
@@ -69,6 +82,9 @@ public class CreateQuiz extends AppCompatActivity {
 
         while (!cursor.isAfterLast()) {
             if(cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_TYPE)).equals("multipleChoice")) {
+
+
+                //
             String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
             String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
             String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
@@ -93,6 +109,10 @@ public class CreateQuiz extends AppCompatActivity {
             questionArray.add(Question);
             cursor.moveToNext();
         }
+
+        progressBar.setOnClickListener(v -> {
+
+        });
 
         btn_multiple.setOnClickListener(e -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
@@ -477,7 +497,7 @@ public class CreateQuiz extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View result;
+            View result=null;
             TextView Txt;
             result = CreateQuiz.this.getLayoutInflater().inflate(R.layout.question, null);
             Txt = result.findViewById(R.id.text_view);
@@ -487,7 +507,6 @@ public class CreateQuiz extends AppCompatActivity {
 
         @Override
         public long getItemId(int position) {
-            Log.i("Why", "ARE WE HERE?!?!?!?!?!?!?!?!");
             cursor.moveToPosition(position);
             return cursor.getLong(cursor.getColumnIndex("ID"));
         }
@@ -500,84 +519,6 @@ public class CreateQuiz extends AppCompatActivity {
         public long getId(int position) {
             return position;
         }
-    }
-
-    public class QuizQuery extends AsyncTask<String, Integer, String> {
-        private SQLiteDatabase db;
-        private Boolean exist;
-        private String A;
-        private String B;
-        private String C;
-        private String D;
-        private String correct;
-        private String question;
-        private InputStream stream;
-        private String query;
-        private Cursor cursor;
-        int c;
-        private String table_name = QuizDatabaseHelper.table_name;
-
-        private ArrayList<Question> questionArray = new ArrayList<>();
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.setRequestMethod("GET");
-                connection.setConnectTimeout(15000);
-                connection.setReadTimeout(10000);
-                connection.connect();
-
-                stream = connection.getInputStream();
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(false);
-                XmlPullParser parser = factory.newPullParser();
-                parser.setInput(stream, null);
-                int eventType = parser.getEventType();
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    switch (eventType) {
-                        case XmlPullParser.START_TAG:
-
-                            break;
-
-
-                        case XmlPullParser.TEXT:
-                            break;
-
-
-                        case XmlPullParser.END_TAG:
-                    }
-                    eventType=parser.next();
-                }
-            } catch (XmlPullParserException | IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (stream != null) {
-                        stream.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... value) {
-            super.onProgressUpdate(value);
-        }
-
-        @Override
-        protected void onPostExecute(String str) {
-            super.onPostExecute(str);
-        }
-
-
     }
     }
 

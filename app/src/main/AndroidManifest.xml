@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chen.final_project">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,10 +22,11 @@
         <activity android:name=".GetStat" />
         <activity android:name=".multipleDetails" />
         <activity android:name=".Patient_Intake_form" />
-        <activity android:name=".tfDetails"/>
+        <activity android:name=".tfDetails" />
         <activity android:name=".Movie_Information" />
         <activity android:name=".OCTranspo_Bus_Route_App" />
-        <activity android:name=".Function"></activity>
+        <activity android:name=".Function" />
+        <activity android:name=".PullParser"></activity>
     </application>
 
 </manifest>

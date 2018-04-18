@@ -4,4 +4,18 @@
     <string name="ADD_multiple">ADD</string>
     <string name="ADD_tf">ADD</string>
     <string name="CANCEL_tf">CANCEL</string>
+    <string name="False">False</string>
+    <string name="True">True</string>
+    <string name="question">question</string>
+    <string name="answera">answerA</string>
+    <string name="answerb">answerB</string>
+    <string name="answerc">answerC</string>
+    <string name="answerd">answerD</string>
+    <string name="accuracy">accuracy</string>
+    <string name="l">  longest question:</string>
+    <string name="tv">TextView</string>
+    <string name="av">average question length:</string>
+    <string name="sh">    shortest question:</string>
+    <string name="Import">You have imported quizzes into the system</string>
+
 </resources>

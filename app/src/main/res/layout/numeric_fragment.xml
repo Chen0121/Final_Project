@@ -19,7 +19,7 @@
 
     <CheckBox
         android:id="@+id/A_fragment"
-        android:text="answerA"
+        android:text="@string/answera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -32,7 +32,7 @@
         android:layout_toEndOf="@+id/A_fragment"/>
     <CheckBox
         android:id="@+id/B_fragment"
-        android:text="answerB"
+        android:text="@string/answerb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_A"/>
@@ -44,7 +44,7 @@
         android:layout_below="@+id/txt_A"/>
     <CheckBox
         android:id="@+id/C_fragment"
-        android:text="answerC"
+        android:text="@string/answerc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_B"/>
@@ -56,7 +56,7 @@
         android:layout_below="@+id/txt_B"/>
     <CheckBox
         android:id="@+id/D_fragment"
-        android:text="answerD"
+        android:text="@string/answerd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_C"/>
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txt_D"
-        android:text="accuracy" />
+        android:text="@string/accuracy" />
 
     <EditText
         android:id="@+id/accuracyline"
