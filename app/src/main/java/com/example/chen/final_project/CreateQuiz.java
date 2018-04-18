@@ -41,6 +41,7 @@ public class CreateQuiz extends AppCompatActivity {
     private TextView bar;
 
     @Override
+    //load initiliazation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_quiz);
@@ -112,6 +113,7 @@ public class CreateQuiz extends AppCompatActivity {
             cursor.moveToNext();
         }
 
+        //an add button of multiple questions
         btn_multiple.setOnClickListener(e -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
             final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.multiple_layout, null);
@@ -155,6 +157,7 @@ public class CreateQuiz extends AppCompatActivity {
             dialog.show();
         });
 
+        //an add button of true/ false question
         btn_tf.setOnClickListener((View e) -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
             final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.tf_layout, null);
@@ -190,6 +193,7 @@ public class CreateQuiz extends AppCompatActivity {
             dialog.show();
         });
 
+        //an add button of numeric questions
         btn_num.setOnClickListener(e -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
             final View view = CreateQuiz.this.getLayoutInflater().inflate(R.layout.numeric_layout, null);
@@ -236,6 +240,8 @@ public class CreateQuiz extends AppCompatActivity {
             dialog.show();
         });
 
+        //list view of current questions
+        //press listview get information
         list_multiple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -333,6 +339,7 @@ public class CreateQuiz extends AppCompatActivity {
         });
     }
 
+    //return activityresult ,delete or update
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
@@ -385,6 +392,7 @@ public class CreateQuiz extends AppCompatActivity {
         }
     }
 
+    //update for multiple questions
     public void updateForTablet(String ans1, String ans2, String ans3, String ans4, String question, String correct) {
         String answer1 = ans1;
         String answer2 = ans2;
@@ -413,6 +421,7 @@ public class CreateQuiz extends AppCompatActivity {
         questionAdapter.notifyDataSetChanged();
     }
 
+    //update for numeric questions
     public void updateForNum(String ans1, String ans2, String ans3, String ans4, String question, String correct, String accuracy) {
         String answer1 = ans1;
         String answer2 = ans2;
@@ -442,6 +451,7 @@ public class CreateQuiz extends AppCompatActivity {
         questionAdapter.notifyDataSetChanged();
     }
 
+    //update for true/false questions
     public void updateForTF(String question, String answer) {
         String que = question;
         String ans = answer;
@@ -460,6 +470,7 @@ public class CreateQuiz extends AppCompatActivity {
         questionAdapter.notifyDataSetChanged();
     }
 
+    //delete tablet
     public void deleteForTablet(long idDB, long idInList) {
         String query;
         long id = idDB;

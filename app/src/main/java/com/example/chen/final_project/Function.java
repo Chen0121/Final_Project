@@ -119,13 +119,10 @@ public class Function extends AppCompatActivity {
             int ave=sum/questionArray.size();
             bundle = new Bundle();
             bundle.putString("lQuestion", long_question);
-            Log.i("here",long_question);
             bundle.putString("sQuestion", short_question);
             bundle.putInt("average",ave );
-            Log.i("here",short_question);
             bundle.putInt("short", shortest);
             bundle.putInt("long", longest);
-            Log.i("here","AAAAAAAAAAAAAA");
             bundle.putInt("sum",sum );
 
             Intent intent_s=new Intent(Function.this,GetStat.class);
