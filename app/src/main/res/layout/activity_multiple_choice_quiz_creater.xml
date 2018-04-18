@@ -24,7 +24,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="49dp"
         android:layout_marginEnd="83dp"
-        android:text="import questions" />
+        android:text="@string/import1" />
 
     <ImageButton
         android:id="@+id/two"
@@ -41,7 +41,7 @@
         android:layout_above="@+id/btn_stat"
         android:layout_alignStart="@+id/btn_stat"
         android:layout_marginBottom="45dp"
-        android:text="create a quiz" />
+        android:text="@string/createquiz" />
 
     <ImageButton
         android:id="@+id/three"
@@ -74,7 +74,7 @@
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btn_import"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="81dp"
         android:text="Quit" />
 
 </RelativeLayout>

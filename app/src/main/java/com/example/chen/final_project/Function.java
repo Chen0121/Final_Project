@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -22,16 +21,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static java.lang.Integer.MAX_VALUE;
+
 
 public class Function extends AppCompatActivity {
     private QuizDatabaseHelper dbHelper = new QuizDatabaseHelper(this);
     private SQLiteDatabase db;
+    private ArrayList<Question> questionArray = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_choice_quiz_creater);
         db = dbHelper.getWritableDatabase();
+
+        Snackbar.make(findViewById(R.id.one), "You have choose Quiz Creator", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
 
         Button btn_import = (Button)findViewById(R.id.btn_import);
         Button btn_create = (Button)findViewById(R.id.btn_create);
@@ -50,8 +55,89 @@ public class Function extends AppCompatActivity {
         });
 
         btn_stat.setOnClickListener(v -> {
-            Intent intent_s=new Intent(Function.this,GetStat.class);
-            startActivity(intent_s);
+//            Intent intent_s=new Intent(Function.this,GetStat.class);
+//            startActivity(intent_s);
+
+                //            int shortest = MAX_VALUE;
+//            int longest=0;
+//            int sum=0;
+//            String short_question = null;
+//            String long_question = null;
+//
+//            for (Question question : questionArray) {
+//                int length=question.getQuestion().length();
+//                if(length < shortest){
+//                    shortest = length;
+//                    short_question = question.getQuestion();
+//                }else if (length > longest){
+//                    longest = length;
+//                    long_question = question.getQuestion();
+//                }
+//                sum+= length;
+//            }
+//            int ave=sum/questionArray.size();
+//            bundle = new Bundle();
+//            bundle.putString("lQuestion", long_question);
+//            Log.i("here",long_question);
+//            bundle.putString("sQuestion", short_question);
+//            bundle.putInt("average",ave );
+//            Log.i("here",short_question);
+//            bundle.putInt("short", shortest);
+//            bundle.putInt("long", longest);
+//            Log.i("here","AAAAAAAAAAAAAA");
+
+                int totMC = 0;
+                int totTF = 0;
+                int totNum = 0;
+                int shortest = MAX_VALUE;
+                int longest = 0;
+                int total = 0;
+                String shortQuestion = " ";
+                String longQuestion = " ";
+                for (Question question : questionArray) {
+                    if (question.getType() == "multipleChoice") {
+                        totMC++;
+                    }
+                    else if (question.getType() == "numeric") {
+                        totTF++;
+                    }
+                    else if (question.getType() == "tf") {
+                        totNum++;
+                    }
+                    if(question.getQuestion().length()<shortest){
+                        shortest = question.getQuestion().length();
+                        shortQuestion = question.getQuestion();
+                    }
+                    if(question.getQuestion().length()>longest){
+                        longest = question.getQuestion().length();
+                        longQuestion = question.getQuestion();
+                    }
+                    total = total + question.getQuestion().length();
+                }
+
+                try{
+                  t=total/questionArray.size();
+                }catch (ArithmeticException e){
+                    e.printStackTrace();
+            }
+                Bundle bundle = new Bundle();
+                bundle.putInt("tot", questionArray.size());
+                bundle.putInt("mc", totMC);
+                bundle.putInt("tf", totTF);
+                bundle.putInt("num", totNum);
+                bundle.putInt("short", shortest);
+                bundle.putInt("long", longest);
+                bundle.putString("average", t);
+                bundle.putString("longQ", longQuestion);
+                bundle.putString("shortQ", shortQuestion);
+
+
+
+
+                Intent toGetStat=new Intent(Function.this,GetStat.class);
+                toGetStat.putExtra("StatsItem", bundle);
+                startActivity(toGetStat,bundle);
+
         });
 
         btn_quit.setOnClickListener(v -> {
@@ -163,9 +249,10 @@ public class Function extends AppCompatActivity {
                             questionArray.add(numQuestion);
                             ContentValues cv = new ContentValues();
                             cv.put(QuizDatabaseHelper.KEY_TYPE, "numeric");
+                            cv.put(QuizDatabaseHelper.KEY_A, accuracy);
                             cv.put(QuizDatabaseHelper.KEY_Question, question);
                             cv.put(QuizDatabaseHelper.KEY_Correct, answer);
-                            cv.put(QuizDatabaseHelper.KEY_Accuracy, accuracy);
+//                            cv.put(QuizDatabaseHelper.KEY_Accuracy, accuracy);
 
                             db.insert(QuizDatabaseHelper.table_name, "", cv);
                             query="SELECT * FROM " + QuizDatabaseHelper.table_name+ ";";

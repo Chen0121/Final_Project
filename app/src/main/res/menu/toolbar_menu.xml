@@ -26,8 +26,8 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/about"
-        android:title="about icon"
+        android:id="@+id/help"
+        android:title="help icon"
         android:orderInCategory="105"
         app:showAsAction="never"/>
 

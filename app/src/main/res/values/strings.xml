@@ -17,5 +17,7 @@
     <string name="av">average question length:</string>
     <string name="sh">    shortest question:</string>
     <string name="Import">You have imported quizzes into the system</string>
+    <string name="import1">import questions</string>
+    <string name="createquiz">create a quiz</string>
 
 </resources>

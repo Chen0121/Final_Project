@@ -1,6 +1,7 @@
 package com.example.chen.final_project;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.option1:
                 Intent Quiz=new Intent(MainActivity.this,Function.class);
                 startActivity(Quiz);
+
                 break;
             case R.id.option2:
 
@@ -46,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
 
                 break;
-            case R.id.about:
+            case R.id.help:
                 CharSequence text = "Version 1.0 by Chen Huang, Zeyang Hu, Lei Cao, Junjin Chen ";
-                int duration = Toast.LENGTH_SHORT;
+                int duration = Toast.LENGTH_LONG;
                 Toast toast = Toast.makeText(this , text, duration);
                 toast.show();
                 break;
