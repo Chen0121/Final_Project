@@ -7,7 +7,7 @@
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="question"
+        android:text="@string/q"
         android:layout_marginBottom="20dp" />
 
     <EditText
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txt_D"
-        android:text="correct" />
+        android:text="@string/c" />
 
     <EditText
         android:id="@+id/correct"

@@ -5,9 +5,9 @@
 
     <TextView
         android:id="@+id/question"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="question"
+        android:text="@string/q"
         android:layout_marginBottom="20dp" />
 
     <EditText
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/E_fragment"
-        android:text="correct" />
+        android:text="@string/c" />
 
     <EditText
         android:id="@+id/correct"
@@ -101,14 +101,14 @@
         android:id="@+id/update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="update"
+        android:text="@string/update"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"/>
     <Button
         android:id="@+id/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="delete"
+        android:text="@string/del"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"/>
 

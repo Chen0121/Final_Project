@@ -17,7 +17,20 @@
     <string name="av">average question length:</string>
     <string name="sh">    shortest question:</string>
     <string name="Import">You have imported quizzes into the system</string>
-    <string name="import1">import questions</string>
-    <string name="createquiz">create a quiz</string>
-
+    <string name="imp">import questions</string>
+    <string name="create_quiz">create a quiz</string>
+    <string name="quit">Quit</string>
+    <string name="sta">get statistics</string>
+    <string name="choose">          CHOOSE questions from here or ADD new questions  </string>
+    <string name="add">ADD      Numeric</string>
+    <string name="addtf">ADD                    True/False</string>
+    <string name="addnum">ADD         Multiple</string>
+    <string name="del">delete</string>
+    <string name="update">update</string>
+    <string name="q">question</string>
+    <string name="c">correct</string>
+    <string name="acc">accuracy</string>
+    <string name="tr">True</string>
+    <string name="fal">False</string>
+    <string name="ch">You have choose Quiz Creator</string>
 </resources>

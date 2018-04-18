@@ -104,14 +104,13 @@ public class CreateQuiz extends AppCompatActivity {
                 String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
                 String accuracy = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Accuracy));
                 Question = new numQuestion(answerA, answerB, answerC, answerD, question, correct, accuracy);
+            }else{
+                Question = new multipleQuestion("null", "null", "null", "null", "null", "null");
+
             }
             questionArray.add(Question);
             cursor.moveToNext();
         }
-
-        progressBar.setOnClickListener(v -> {
-
-        });
 
         btn_multiple.setOnClickListener(e -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateQuiz.this);
@@ -182,7 +181,6 @@ public class CreateQuiz extends AppCompatActivity {
                 db.insert(table_name, "", cv);
                 query = "SELECT * FROM " + table_name + ";";
                 cursor = db.rawQuery(query, null);
-
                 cursor.moveToFirst();
                 questionAdapter.notifyDataSetChanged();
             });
@@ -241,6 +239,7 @@ public class CreateQuiz extends AppCompatActivity {
         list_multiple.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Log.i("Frame exists: ", "?"+isTablet);
                 if (questionAdapter.getItem(position).getType().equals("multipleChoice")) {
                     String a1 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerA();
                     String a2 = ((multipleQuestion) questionAdapter.getItem(position)).getAnswerB();
@@ -276,19 +275,13 @@ public class CreateQuiz extends AppCompatActivity {
                     String question = questionAdapter.getItem(position).getQuestion();
                     Boolean isR = ((tfQuestion) questionAdapter.getItem(position)).isRight();
 
-                    String answer = null;
-                    if (isR = true) {
-                        answer = "true";
-                    } else if (isR = false) {
-                        answer = "false";
-                    }
                     long id_inList = questionAdapter.getId(position);
                     bundle = new Bundle();
                     tfFragment Fragment = new tfFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("type", "tf");
                     bundle.putString("Question", question);
-                    bundle.putString("answer", answer);
+                    bundle.putBoolean("answer", isR);
                     bundle.putLong("LIST", id_inList);
                     bundle.putLong("ID", id);
 
@@ -392,7 +385,6 @@ public class CreateQuiz extends AppCompatActivity {
         }
     }
 
-
     public void updateForTablet(String ans1, String ans2, String ans3, String ans4, String question, String correct) {
         String answer1 = ans1;
         String answer2 = ans2;
@@ -411,6 +403,8 @@ public class CreateQuiz extends AppCompatActivity {
         cv.put(KEY_D, answer4);
         cv.put(KEY_Question, que);
         cv.put(KEY_Correct, c);
+        cv.put(KEY_TYPE, "multipleChoice");
+
 
         db.insert(table_name, "", cv);
         query = "SELECT * FROM " + table_name + ";";
@@ -439,6 +433,7 @@ public class CreateQuiz extends AppCompatActivity {
         cv.put(KEY_Question, que);
         cv.put(KEY_Correct, c);
         cv.put(KEY_Accuracy, acc);
+        cv.put(KEY_TYPE, "numeric");
 
         db.insert(table_name, "", cv);
         query = "SELECT * FROM " + table_name + ";";
@@ -456,6 +451,7 @@ public class CreateQuiz extends AppCompatActivity {
         ContentValues cv = new ContentValues();
         cv.put(KEY_Question, que);
         cv.put(KEY_Correct, ans);
+        cv.put(KEY_TYPE, "tf");
 
         db.insert(table_name, "", cv);
         query = "SELECT * FROM " + table_name + ";";
@@ -517,8 +513,6 @@ public class CreateQuiz extends AppCompatActivity {
             return position;
         }
     }
-
-
 }
 
 

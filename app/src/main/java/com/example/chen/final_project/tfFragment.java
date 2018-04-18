@@ -34,15 +34,16 @@ public class tfFragment extends Fragment {
 
         Bundle bundle = getArguments();
         String tfquestion= bundle.getString("Question");
-        String tfanswer= bundle.getString("answer");
+        boolean tfanswer= bundle.getBoolean("answer");
         final long id= bundle.getLong("ID");
         final long list = bundle.getLong("LIST");
 
         tfQuestion.setText(tfquestion);
-        if(tfanswer.equals("1")){
+        if(tfanswer){
             checkA.setChecked(true);
-        }else if(tfanswer.equals("2")){
+        }else {
             checkB.setChecked(true);
+
         }
 
         btn_delete.setOnClickListener(view15 -> {

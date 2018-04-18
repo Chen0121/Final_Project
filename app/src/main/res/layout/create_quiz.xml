@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="28dp"
-        android:text="          CHOOSE questions from here or ADD new questions  " />
+        android:text="@string/choose" />
 
     <ListView
         android:id="@+id/list_1"
@@ -27,7 +27,7 @@
         android:layout_height="81dp"
         android:layout_above="@+id/progressBar"
         android:layout_alignParentStart="true"
-        android:text="ADD      Numeric" />
+        android:text="@string/add" />
 
     <Button
         android:id="@+id/button_tf"
@@ -35,7 +35,7 @@
         android:layout_height="80dp"
         android:layout_alignTop="@+id/button_numeric"
         android:layout_centerHorizontal="true"
-        android:text="ADD                    True/False" />
+        android:text="@string/addtf" />
 
     <Button
         android:id="@+id/button_multiple"
@@ -43,7 +43,7 @@
         android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/button_numeric"
-        android:text="ADD         Multiple" />
+        android:text="@string/addnum" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Final_Project</string>
+    <string name="CANCEL_multiple">取消</string>
+    <string name="ADD_multiple">添加</string>
+    <string name="ADD_tf">添加</string>
+    <string name="CANCEL_tf">取消</string>
+    <string name="False">错误</string>
+    <string name="True">正确</string>
+    <string name="question">问题</string>
+    <string name="answera">选项A</string>
+    <string name="answerb">选项B</string>
+    <string name="answerc">选项C</string>
+    <string name="answerd">选项D</string>
+    <string name="accuracy">精度</string>
+    <string name="l">最长的问题是：</string>
+    <string name="tv">TextView</string>
+    <string name="av">问题的平均长度是：</string>
+    <string name="sh">最短的问题是：</string>
+    <string name="Import">你已将问题导入</string>
+    <string name="imp">导入问题</string>
+    <string name="create_quiz">创建测试</string>
+    <string name="quit">退出</string>
+    <string name="sta">统计</string>
+    <string name="choose">请从以下清单中选择问题或者直接添加相应题型</string>
+    <string name="add">添加数字题</string>
+    <string name="addtf">添加判断题</string>
+    <string name="addnum">添加单选题</string>
+    <string name="del">删除</string>
+    <string name="update">更新</string>
+    <string name="q">问题</string>
+    <string name="c">正确</string>
+    <string name="acc">精度</string>
+    <string name="tr">正确</string>
+    <string name="fal">错误</string>
+
+</resources>

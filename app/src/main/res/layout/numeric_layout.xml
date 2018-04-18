@@ -7,7 +7,7 @@
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="question"
+        android:text="@string/q"
         android:layout_marginBottom="20dp" />
 
     <EditText
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/txt_D"
-        android:text="accuracy" />
+        android:text="@string/acc" />
 
     <EditText
         android:id="@+id/accuracyline"
@@ -82,28 +82,13 @@
         android:layout_toEndOf="@+id/D_fragment"
         android:layout_below="@+id/txt_D"/>
 
-    <!--<Button-->
-        <!--android:id="@+id/update"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="ADD"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_alignParentBottom="true"/>-->
-    <!--<Button-->
-        <!--android:id="@+id/delete"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="CANCEL"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentBottom="true"/>-->
-
     <TextView
         android:id="@+id/textview_correct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/E_fragment"
-        android:text="correct" />
+        android:text="@string/c" />
 
     <EditText
         android:id="@+id/correct"
