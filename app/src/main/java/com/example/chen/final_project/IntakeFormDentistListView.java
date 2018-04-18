@@ -47,9 +47,11 @@ public class IntakeFormDentistListView extends Activity {
                 new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
                         PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
                         PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
-                        PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, PatientDatabaseHelper.COLUMN_GLASSESSTORE},
-                "COL_GLASSESBOUGHT IS NOT ? AND COL_GLASSESSTORE IS NOT ?",
-                new String[]{"NULL", "NULL"}, null, null, null, null);
+                        PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, PatientDatabaseHelper.COLUMN_ALLERGIES,
+                        PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, PatientDatabaseHelper.COLUMN_GLASSESSTORE,
+                        PatientDatabaseHelper.COLUMN_BENEFITS, PatientDatabaseHelper.COLUMN_HADBRACES},
+                "COL_PREVIOUSSURGERY IS NULL AND " +"COL_GLASSESBOUGHT IS  NULL ",
+                new String[]{}, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             String patientName = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_NAME));

@@ -77,8 +77,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/intakeForm_GeneralDescription"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:layout_marginTop="15dp"
+        android:layout_columnSpan="2"/>
+
+    <Button
+        android:id="@+id/buttonCalculatePatientAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate Average Patient Age"
         android:layout_columnSpan="2"/>
 
 

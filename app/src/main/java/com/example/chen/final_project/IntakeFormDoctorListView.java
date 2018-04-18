@@ -45,14 +45,16 @@ public class IntakeFormDoctorListView extends Activity {
 
         // scan the entire table and put entry into arraylist patientinfo
         patientInfoArraylist = new ArrayList<>(40);
-        cursor =db.query(false,
-                    PatientDatabaseHelper.TABLE_NAME,
-                    new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
-                            PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
-                            PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
-                            PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, PatientDatabaseHelper.COLUMN_ALLERGIES},
-                    "COL_PREVIOUSSURGERY IS NOT ? AND COL_ALLERGIES IS NOT ?",
-                    new String[]{"NULL","NULL"},null,null,null,null);
+        cursor = db.query(false,
+                PatientDatabaseHelper.TABLE_NAME,
+                new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
+                        PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
+                        PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
+                        PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, PatientDatabaseHelper.COLUMN_ALLERGIES,
+                        PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, PatientDatabaseHelper.COLUMN_GLASSESSTORE,
+                        PatientDatabaseHelper.COLUMN_BENEFITS, PatientDatabaseHelper.COLUMN_HADBRACES},
+                "COL_PREVIOUSSURGERY IS NOT NULL OR COL_PREVIOUSSURGERY = ? AND COL_ALLERGIES IS NOT NULL OR COL_ALLERGIES = ?",
+                new String[]{"",""},null,null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             String patientName = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_NAME));

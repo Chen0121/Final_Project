@@ -43,14 +43,16 @@ public class IntakeFormOptometristListView extends Activity {
 
         // scan the entire table and put entry into arraylist patientinfo
         patientInfoArraylist = new ArrayList<>(40);
-        cursor =db.query(false,
+        cursor = db.query(false,
                 PatientDatabaseHelper.TABLE_NAME,
                 new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
                         PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
                         PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
-                        PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, PatientDatabaseHelper.COLUMN_GLASSESSTORE},
-                "COL_GLASSESBOUGHT IS NOT ? AND COL_GLASSESSTORE IS NOT ?",
-                new String[]{"NULL","NULL"},null,null,null,null);
+                        PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, PatientDatabaseHelper.COLUMN_ALLERGIES,
+                        PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, PatientDatabaseHelper.COLUMN_GLASSESSTORE,
+                        PatientDatabaseHelper.COLUMN_BENEFITS, PatientDatabaseHelper.COLUMN_HADBRACES},
+                "COL_GLASSESBOUGHT IS NOT NULL OR COL_GLASSESBOUGHT = ? AND COL_GLASSESSTORE IS NOT NULL OR COL_GLASSESSTORE = ?",
+                new String[]{"",""},null,null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             String patientName = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_NAME));

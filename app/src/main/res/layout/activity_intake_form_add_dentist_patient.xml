@@ -13,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="17dp"
-        android:text="Please fill in the following field:" />
+        android:text="Please fill ALL in the following field:" />
 
     <EditText
         android:id="@+id/intakeForm_AddPatientName_Dentist"
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/intakeForm_AddPatientAddress_Dentist"
-        android:hint="Patient Birthday: YYYY/MM/DD"/>
+        android:hint="Patient Birthday: YYYY-MM-DD"/>
 
     <EditText
         android:id="@+id/intakeForm_AddPatientPhone_Dentist"

@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="17dp"
-        android:text="Please fill in the following field:" />
+        android:text="Please fill ALL in the following field:" />
 
     <EditText
         android:id="@+id/intakeForm_AddPatientName_Optometrist"
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/intakeForm_AddPatientAddress_Optometrist"
-        android:hint="Patient Birthday: YYYY/MM/DD"/>
+        android:hint="Patient Birthday: YYYY-MM-DD"/>
 
     <EditText
         android:id="@+id/intakeForm_AddPatientPhone_Optometrist"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/intakeForm_AddPatientDescription_Optometrist"
-        android:hint="Glass Bought" />
+        android:hint=" When do you bought this Glasses" />
 
     <EditText
         android:id="@+id/intakeForm_AddPatientGlassesstore_Optometrist"
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/intakeForm_AddPatientGlassesbought_Optometrist"
-        android:hint="Glass Store" />
+        android:hint="From which Glasses Store" />
 
     <Button
         android:id="@+id/intakeForm_AddPatientSumbitButton_Optometrist"
