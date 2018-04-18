@@ -15,6 +15,8 @@ import android.widget.Toast;
 public class Patient_Intake_form extends AppCompatActivity {
 
     Button buttonRegisterDoctor;
+    Button buttonRegisterDentist;
+    Button buttonRegisterOptometrist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,24 @@ public class Patient_Intake_form extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Patient_Intake_form.this, IntakeFormDoctorListView.class);
                 startActivityForResult(intent,40);
+            }
+        });
+
+        buttonRegisterDentist = (Button)findViewById(R.id.buttonRegisterDentist);
+        buttonRegisterDentist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Patient_Intake_form.this,IntakeFormDentistListView.class);
+                startActivity(intent1);
+            }
+        });
+
+        buttonRegisterOptometrist = (Button)findViewById(R.id.buttonRegisterOptometrist);
+        buttonRegisterOptometrist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Patient_Intake_form.this,IntakeFormOptometristListView.class);
+                startActivity(intent2);
             }
         });
 ;

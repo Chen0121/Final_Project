@@ -19,9 +19,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class IntakeFormDoctorListView extends Activity {
+public class IntakeFormOptometristListView extends Activity {
 
-    static final String ACTIVITY_NAME = "DoctorListView";
+    static final String ACTIVITY_NAME = "OptometristListView";
 
     Button buttonAddPatient;
     ListView listViewPatientList;
@@ -35,9 +35,7 @@ public class IntakeFormDoctorListView extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intake_form_doctor_list_view);
-
-
+        setContentView(R.layout.activity_intake_form_optometrist_list_view);
 
         //Use the Singleton to connect to the database
         patientDatabaseHelper = PatientDatabaseHelper.getInstance(this);
@@ -46,13 +44,13 @@ public class IntakeFormDoctorListView extends Activity {
         // scan the entire table and put entry into arraylist patientinfo
         patientInfoArraylist = new ArrayList<>(40);
         cursor =db.query(false,
-                    PatientDatabaseHelper.TABLE_NAME,
-                    new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
-                            PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
-                            PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
-                            PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, PatientDatabaseHelper.COLUMN_ALLERGIES},
-                    "COL_PREVIOUSSURGERY IS NOT ? AND COL_ALLERGIES IS NOT ?",
-                    new String[]{"NULL","NULL"},null,null,null,null);
+                PatientDatabaseHelper.TABLE_NAME,
+                new String[]{PatientDatabaseHelper.COLUMN_NAME, PatientDatabaseHelper.COLUMN_ADDRESS,
+                        PatientDatabaseHelper.COLUMN_BIRTHDAY, PatientDatabaseHelper.COLUMN_PHONE,
+                        PatientDatabaseHelper.COLUMN_HEALTHCARD, PatientDatabaseHelper.COLUMN_DESCRIPTION,
+                        PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, PatientDatabaseHelper.COLUMN_GLASSESSTORE},
+                "COL_GLASSESBOUGHT IS NOT ? AND COL_GLASSESSTORE IS NOT ?",
+                new String[]{"NULL","NULL"},null,null,null,null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             String patientName = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_NAME));
@@ -68,7 +66,7 @@ public class IntakeFormDoctorListView extends Activity {
         }
 
         //get the List and use Adapter to connect patientInfoArrayList to this listview
-        listViewPatientList =(ListView)findViewById(R.id.IntakeForm_PatientListView_Doctor);
+        listViewPatientList =(ListView)findViewById(R.id.IntakeForm_PatientListView_Optometrist);
         patientListAdapter = new PatientListAdapter(this);
         listViewPatientList.setAdapter(patientListAdapter);
         listViewPatientList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -77,6 +75,7 @@ public class IntakeFormDoctorListView extends Activity {
 
                 String dbid = patientListAdapter.getItemID(position);
                 int listViewPosition = patientListAdapter.getId(position);
+
 
                 cursor = db.rawQuery("SELECT * FROM "+ PatientDatabaseHelper.TABLE_NAME + " WHERE " + PatientDatabaseHelper.COLUMN_ID + " = "+ dbid,null);
                 cursor.moveToFirst();
@@ -89,11 +88,11 @@ public class IntakeFormDoctorListView extends Activity {
                 String patientPhone =cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_PHONE));
                 String patientHealthcard = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_HEALTHCARD));
                 String patientDescription = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_DESCRIPTION));
-                String patientSurgery = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY));
-                String patientAllergies = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ALLERGIES));
+                String patientGlassesbought = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_GLASSESBOUGHT));
+                String patientGlassesstore = cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_GLASSESSTORE));
 
                 Bundle patientBundle = new Bundle();
-                int flag = 1;
+                int flag = 3;
                 patientBundle.putInt("Patient_Flag",flag);
                 patientBundle.putInt("Patient_Listview_Position",listViewPosition);
                 patientBundle.putString("Patient_ID",patientID);
@@ -103,27 +102,33 @@ public class IntakeFormDoctorListView extends Activity {
                 patientBundle.putString("Patient_Phone",patientPhone);
                 patientBundle.putString("Patient_Healthcard",patientHealthcard);
                 patientBundle.putString("Patient_Description",patientDescription);
-                patientBundle.putString("Patient_SP1",patientSurgery);
-                patientBundle.putString("Patient_SP2",patientAllergies);
+                patientBundle.putString("Patient_SP1",patientGlassesbought);
+                patientBundle.putString("Patient_SP2",patientGlassesstore);
 
 
-                Intent intent = new Intent(IntakeFormDoctorListView.this, Intake_Form_Empty_Detail.class);
+                Intent intent = new Intent(IntakeFormOptometristListView.this, Intake_Form_Empty_Detail.class);
                 intent.putExtra("PatientInfo", patientBundle);
-                startActivityForResult(intent,12,patientBundle);
-
+                startActivityForResult(intent,14,patientBundle);
             }
         });
 
         // add a new Patient
-        buttonAddPatient = (Button)findViewById(R.id.buttonAddPatient_Doctor);
+        buttonAddPatient = (Button)findViewById(R.id.buttonAddPatient_Optometrist);
+        buttonAddPatient = (Button)findViewById(R.id.buttonAddPatient_Optometrist);
         buttonAddPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IntakeFormDoctorListView.this, Intake_Form_Add_Doctor_Patient.class);
+                Intent intent = new Intent(IntakeFormOptometristListView.this, Intake_Form_Add_Optometrist_Patient.class);
                 startActivityForResult(intent, 500);
             }
         });
+    }
 
+    protected void onDestroy() {
+        Log.i(ACTIVITY_NAME, "In onDestroy()");
+        super.onDestroy();
+        cursor.close();
+        db.close();
     }
 
     private class PatientListAdapter extends ArrayAdapter<String>{
@@ -133,7 +138,7 @@ public class IntakeFormDoctorListView extends Activity {
         }
 
         public View getView(int position, View convertView, ViewGroup Parent){
-            LayoutInflater inflater = IntakeFormDoctorListView.this.getLayoutInflater();
+            LayoutInflater inflater = IntakeFormOptometristListView.this.getLayoutInflater();
 
             View result = null;
             result = inflater.inflate(R.layout.intake_form_patient_listview_layout,null);
@@ -163,22 +168,14 @@ public class IntakeFormDoctorListView extends Activity {
             return cursor.getString(cursor.getColumnIndex(PatientDatabaseHelper.COLUMN_ID));
         }
 
-
         public int getId(int position){
             return position;
         }
     }
 
-    protected void onDestroy() {
-        Log.i(ACTIVITY_NAME, "In onDestroy()");
-        super.onDestroy();
-        cursor.close();
-        db.close();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode ==12 && resultCode ==12){
+        if(requestCode ==14 && resultCode ==12){
             Bundle retrival;
             retrival = data.getExtras();
 
@@ -193,6 +190,4 @@ public class IntakeFormDoctorListView extends Activity {
         }
 
     }
-
-
 }

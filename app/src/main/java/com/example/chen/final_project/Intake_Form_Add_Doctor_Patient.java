@@ -28,8 +28,8 @@ public class Intake_Form_Add_Doctor_Patient extends Activity {
     EditText intakeForm_AddPatientBirthday_Doctor;
     EditText intakeForm_AddPatientPhone_Doctor;
     EditText intakeForm_AddPatientHealthcard_Doctor;
+    EditText intakeForm_AddPatientDescription_Doctor;
     EditText intakeForm_AddPatientPreviousSurgery_Doctor;
-    EditText intakeForm_AddPatientDescrption_Doctor;
     EditText intakeForm_AddPatientAllergies_Doctor;
 
     Button buttonSumbit;
@@ -46,7 +46,7 @@ public class Intake_Form_Add_Doctor_Patient extends Activity {
         intakeForm_AddPatientBirthday_Doctor = (EditText)findViewById(R.id.intakeForm_AddPatientBirthday_Doctor);
         intakeForm_AddPatientPhone_Doctor =(EditText)findViewById(R.id.intakeForm_AddPatientPhone_Doctor);
         intakeForm_AddPatientHealthcard_Doctor = (EditText)findViewById(R.id.intakeForm_AddPatientHealthcard_Doctor);
-        intakeForm_AddPatientDescrption_Doctor =(EditText)findViewById(R.id.intakeForm_AddPatientDescrption_Doctor);
+        intakeForm_AddPatientDescription_Doctor =(EditText)findViewById(R.id.intakeForm_AddPatientDescription_Doctor);
         intakeForm_AddPatientPreviousSurgery_Doctor =(EditText)findViewById(R.id.intakeForm_AddPatientPreviousSurgery_Doctor);
         intakeForm_AddPatientAllergies_Doctor = (EditText)findViewById(R.id.intakeForm_AddPatientAllergies_Doctor);
 
@@ -69,7 +69,7 @@ public class Intake_Form_Add_Doctor_Patient extends Activity {
                 newData.put(PatientDatabaseHelper.COLUMN_BIRTHDAY, intakeForm_AddPatientBirthday_Doctor.getText().toString());
                 newData.put(PatientDatabaseHelper.COLUMN_PHONE, intakeForm_AddPatientPhone_Doctor.getText().toString());
                 newData.put(PatientDatabaseHelper.COLUMN_HEALTHCARD, intakeForm_AddPatientHealthcard_Doctor.getText().toString());
-                newData.put(PatientDatabaseHelper.COLUMN_DESCRIPTION,intakeForm_AddPatientDescrption_Doctor.getText().toString());
+                newData.put(PatientDatabaseHelper.COLUMN_DESCRIPTION,intakeForm_AddPatientDescription_Doctor.getText().toString());
                 newData.put(PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, intakeForm_AddPatientPreviousSurgery_Doctor.getText().toString());
                 newData.put(PatientDatabaseHelper.COLUMN_ALLERGIES,intakeForm_AddPatientAllergies_Doctor.getText().toString());
 
@@ -81,8 +81,8 @@ public class Intake_Form_Add_Doctor_Patient extends Activity {
                 intakeForm_AddPatientBirthday_Doctor.setText("");
                 intakeForm_AddPatientPhone_Doctor.setText("");
                 intakeForm_AddPatientHealthcard_Doctor.setText("");
+                intakeForm_AddPatientDescription_Doctor.setText("");
                 intakeForm_AddPatientPreviousSurgery_Doctor.setText("");
-                intakeForm_AddPatientDescrption_Doctor.setText("");
                 intakeForm_AddPatientAllergies_Doctor.setText("");
 
                 Intent returnIntent = new Intent(Intake_Form_Add_Doctor_Patient.this, Patient_Intake_form.class);

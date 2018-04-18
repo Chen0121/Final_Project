@@ -124,8 +124,16 @@ public class DetailFragment extends Fragment {
                 newData.put(PatientDatabaseHelper.COLUMN_PHONE, intakeform_PatientFragment_Item_Phone.getText().toString());
                 newData.put(PatientDatabaseHelper.COLUMN_HEALTHCARD, intakeform_PatientFragment_Item_Healthcard.getText().toString());
                 newData.put(PatientDatabaseHelper.COLUMN_DESCRIPTION,intakeform_PatientFragment_Item_Description.getText().toString());
-                newData.put(PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, intakeform_PatientFragment_Item_SP1.getText().toString());
-                newData.put(PatientDatabaseHelper.COLUMN_ALLERGIES,intakeform_PatientFragment_Item_SP2.getText().toString());
+                if(bundle.getInt("Patient_Flag")==1) {
+                    newData.put(PatientDatabaseHelper.COLUMN_PREVIOUSSURGERY, intakeform_PatientFragment_Item_SP1.getText().toString());
+                    newData.put(PatientDatabaseHelper.COLUMN_ALLERGIES, intakeform_PatientFragment_Item_SP2.getText().toString());
+                }else if(bundle.getInt("Patient_Flag")==2){
+                    newData.put(PatientDatabaseHelper.COLUMN_BENEFITS, intakeform_PatientFragment_Item_SP1.getText().toString());
+                    newData.put(PatientDatabaseHelper.COLUMN_HADBRACES,intakeform_PatientFragment_Item_SP2.getText().toString());
+                }else if(bundle.getInt("Patient_Flag")==3){
+                    newData.put(PatientDatabaseHelper.COLUMN_GLASSESBOUGHT, intakeform_PatientFragment_Item_SP1.getText().toString());
+                    newData.put(PatientDatabaseHelper.COLUMN_GLASSESSTORE, intakeform_PatientFragment_Item_SP2.getText().toString());
+                }
 
                 db.update(PatientDatabaseHelper.TABLE_NAME,newData,PatientDatabaseHelper.COLUMN_ID + " = "+bundle.getString("Patient_ID"),null);
 

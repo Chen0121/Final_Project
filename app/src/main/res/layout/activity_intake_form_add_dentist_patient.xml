@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.chen.final_project.Intake_Form_Add_Doctor_Patient">
+    tools:context="com.example.chen.final_project.Intake_Form_Add_Dentist_Patient">
 
     <TextView
-        android:id="@+id/intakeForm_Doctor_Patient_Description"
+        android:id="@+id/intakeForm_Dentist_Patient_Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -16,69 +16,69 @@
         android:text="Please fill in the following field:" />
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientName_Doctor"
+        android:id="@+id/intakeForm_AddPatientName_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/intakeForm_Doctor_Patient_Description"
+        android:layout_below="@+id/intakeForm_Dentist_Patient_Description"
         android:layout_marginTop="34dp"
         android:hint="Patient Name" />
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientAddress_Doctor"
+        android:id="@+id/intakeForm_AddPatientAddress_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/intakeForm_AddPatientName_Doctor"
+        android:layout_below="@+id/intakeForm_AddPatientName_Dentist"
         android:hint="Patient Address"/>
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientBirthday_Doctor"
+        android:id="@+id/intakeForm_AddPatientBirthday_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intakeForm_AddPatientAddress_Doctor"
+        android:layout_below="@+id/intakeForm_AddPatientAddress_Dentist"
         android:hint="Patient Birthday: YYYY/MM/DD"/>
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientPhone_Doctor"
+        android:id="@+id/intakeForm_AddPatientPhone_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intakeForm_AddPatientBirthday_Doctor"
+        android:layout_below="@+id/intakeForm_AddPatientBirthday_Dentist"
         android:hint="Patient Phone Number"/>
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientHealthcard_Doctor"
+        android:id="@+id/intakeForm_AddPatientHealthcard_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intakeForm_AddPatientPhone_Doctor"
+        android:layout_below="@+id/intakeForm_AddPatientPhone_Dentist"
         android:hint="Patient Health Card"/>
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientDescription_Doctor"
+        android:id="@+id/intakeForm_AddPatientDescription_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/intakeForm_AddPatientHealthcard_Doctor"
+        android:layout_below="@+id/intakeForm_AddPatientHealthcard_Dentist"
         android:hint="Description" />
 
     <EditText
-        android:id="@+id/intakeForm_AddPatientPreviousSurgery_Doctor"
+        android:id="@+id/intakeForm_AddPatientBenifits_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/intakeForm_AddPatientDescription_Doctor"
-        android:hint="Previous Surgery" />
+        android:layout_below="@+id/intakeForm_AddPatientDescription_Dentist"
+        android:hint="Patient Benefits" />
 
-    <EditText
-        android:id="@+id/intakeForm_AddPatientAllergies_Doctor"
+
+    <CheckBox
+        android:id="@+id/intakeForm_AddPatientHadbraces_Dentist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/intakeForm_AddPatientPreviousSurgery_Doctor"
-        android:hint="Allergies" />
+        android:layout_below="@+id/intakeForm_AddPatientBenifits_Dentist"
+        android:text="Do you have braces?" />
 
     <Button
-        android:id="@+id/intakeForm_AddPatientSumbitButton_Doctor"
+        android:id="@+id/intakeForm_AddPatientSumbitButton_Dentist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -87,12 +87,14 @@
         android:text="Sumbit" />
 
     <Button
-        android:id="@+id/intakeForm_AddPatientCancelButton_Doctor"
+        android:id="@+id/intakeForm_AddPatientCancelButton_Dentist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:text="Cancel" />
+
+
 
 </RelativeLayout>

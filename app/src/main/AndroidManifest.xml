@@ -29,7 +29,11 @@
             android:name=".IntakeFormDoctorListView"
             android:label="@string/intakeForm_RegisterForDoctor" />
         <activity android:name=".Intake_Form_Add_Doctor_Patient" />
-        <activity android:name=".Intake_Form_Empty_Detail"></activity>
+        <activity android:name=".Intake_Form_Empty_Detail" />
+        <activity android:name=".IntakeFormDentistListView" />
+        <activity android:name=".Intake_Form_Add_Dentist_Patient" />
+        <activity android:name=".Intake_Form_Add_Optometrist_Patient" />
+        <activity android:name=".IntakeFormOptometristListView"></activity>
     </application>
 
 </manifest>
