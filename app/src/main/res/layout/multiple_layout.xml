@@ -82,19 +82,5 @@
         android:layout_below="@+id/txt_D"
         android:layout_toEndOf="@id/textview_correct" />
 
-    <!--<Button-->
-        <!--android:id="@+id/update"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="ADD"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_alignParentBottom="true"/>-->
-    <!--<Button-->
-        <!--android:id="@+id/delete"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="CANCEL"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentBottom="true"/>-->
 
 </RelativeLayout>

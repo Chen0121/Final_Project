@@ -32,5 +32,5 @@
     <string name="acc">accuracy</string>
     <string name="tr">True</string>
     <string name="fal">False</string>
-    <string name="ch">You have choose Quiz Creator</string>
+    <string name="ch">You have choose Quiz Creator.You can create or import (mc or true/false or numeric questions).</string>
 </resources>

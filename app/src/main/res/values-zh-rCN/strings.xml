@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final_Project</string>
+    <string name="app_name">安卓作业</string>
     <string name="CANCEL_multiple">取消</string>
     <string name="ADD_multiple">添加</string>
     <string name="ADD_tf">添加</string>
@@ -32,5 +32,6 @@
     <string name="acc">精度</string>
     <string name="tr">正确</string>
     <string name="fal">错误</string>
+    <string name="ch">你选择了创建测试程序，你可以添加或导入单选题，判断题和数字题</string>
 
 </resources>
