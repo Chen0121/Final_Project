@@ -2,6 +2,8 @@ package com.example.chen.final_project;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,23 +14,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 public class Patient_Intake_form extends AppCompatActivity {
 
     Button buttonRegisterDoctor;
     Button buttonRegisterDentist;
     Button buttonRegisterOptometrist;
+    Button buttonCalculatePatientAge;
+
+    PatientDatabaseHelper patientDatabaseHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_intake_form);
 
+        //Use the Singleton to connect to the database
+        patientDatabaseHelper = PatientDatabaseHelper.getInstance(this);
+        db = patientDatabaseHelper.getWritableDatabase();
+
+
+
         buttonRegisterDoctor = (Button)findViewById(R.id.buttonRegisterDoctor);
         buttonRegisterDoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Patient_Intake_form.this, IntakeFormDoctorListView.class);
-                startActivityForResult(intent,40);
+            Intent intent = new Intent(Patient_Intake_form.this, IntakeFormDoctorListView.class);
+            startActivityForResult(intent,40);
             }
         });
 
@@ -36,8 +55,8 @@ public class Patient_Intake_form extends AppCompatActivity {
         buttonRegisterDentist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(Patient_Intake_form.this,IntakeFormDentistListView.class);
-                startActivity(intent1);
+            Intent intent1 = new Intent(Patient_Intake_form.this,IntakeFormDentistListView.class);
+            startActivity(intent1);
             }
         });
 
@@ -45,11 +64,72 @@ public class Patient_Intake_form extends AppCompatActivity {
         buttonRegisterOptometrist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(Patient_Intake_form.this,IntakeFormOptometristListView.class);
-                startActivity(intent2);
+            Intent intent2 = new Intent(Patient_Intake_form.this,IntakeFormOptometristListView.class);
+            startActivity(intent2);
             }
         });
-;
+
+        buttonCalculatePatientAge = (Button)findViewById(R.id.buttonCalculatePatientAge);
+        buttonCalculatePatientAge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                cursor = db.rawQuery("SELECT "+ PatientDatabaseHelper.COLUMN_BIRTHDAY + " FROM " + PatientDatabaseHelper.TABLE_NAME,null);
+                cursor.moveToFirst();
+                ArrayList<Integer> arraylist= new ArrayList<>();
+                int total=0;
+                int averageDOB=0;
+                int patientAveAge;
+                int patientMax;
+                int patientMaxAge;
+                int patientMin;
+                int patientMinAge;
+
+                //Calculate the the Average Age for all patients
+                for(int i=0; i<cursor.getCount(); i++){
+                    int p = Integer.parseInt(cursor.getString(cursor.getColumnIndex("COL_BIRTHDAY")).substring(0,4));
+                    arraylist.add(p);
+                    cursor.moveToNext();
+                }
+                for(int j =0; j < arraylist.size();j++){
+                    total +=arraylist.get(j);
+                }
+                averageDOB = total/arraylist.size();
+                patientAveAge = 2018 -averageDOB;
+
+                //Calculate the youngest Age for all patients
+                patientMax = arraylist.get(0);
+                for(int k =0; k< arraylist.size(); k++){
+                    if(arraylist.get(k)>patientMax){
+                        patientMax = arraylist.get(k);
+                    }
+                }
+                patientMinAge = 2018 - patientMax;
+
+                //Calculate the eldest Age for all patients
+                patientMin = arraylist.get(0);
+                for(int m = 0; m<arraylist.size();m++){
+                    if(arraylist.get(m)<patientMin){
+                        patientMin = arraylist.get(0);
+                    }
+                }
+                patientMaxAge = 2018 - patientMin;
+
+                AlertDialog.Builder alertdialog = new AlertDialog.Builder(Patient_Intake_form.this);
+                alertdialog.setTitle("The ages for all patient are ");
+                alertdialog.setMessage("Average age : "+String.valueOf(patientAveAge)+"\n"+"Eldest age : "+String.valueOf(patientMaxAge)+"\n"+"Youngest age : " +String.valueOf(patientMinAge));
+
+                alertdialog.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //do nothing
+                    }
+                });
+                AlertDialog dialogshow = alertdialog.create();
+                dialogshow.show();
+            }
+        });
+        
     }
 
 
@@ -84,7 +164,7 @@ public class Patient_Intake_form extends AppCompatActivity {
             case R.id.intakeForm_menuItemPatientList:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Do you wish to Retrieve the Patient List? ");
-                String[] patientType ={"Doctor","Dentist","Optometrist"};
+
 
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
