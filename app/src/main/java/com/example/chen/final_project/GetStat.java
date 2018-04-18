@@ -26,12 +26,13 @@ public class GetStat extends Activity {
         TextView tv_long = findViewById(R.id.view1);
         TextView tv_short = findViewById(R.id.view2);
         TextView tv_average = findViewById(R.id.view3);
+        bundle = getIntent().getBundleExtra("stats");
 
         int sum = bundle.getInt("sum");
 
         String long_que= bundle.getString("lQuestion");
         String short_que = bundle.getString("sQuestion");
-        String aver= bundle.getString("average");
+        String aver= new Integer(bundle.getInt("average")).toString();
 
         tv_long.setText(long_que);
         tv_short.setText(short_que);

@@ -20,11 +20,7 @@ public class numFragment extends Fragment {
     private EditText numQuestion;
     private EditText numCorrect;
     private EditText numA;
-    private CheckBox checkA;
-    private CheckBox checkB;
-    private CheckBox checkC;
-    private CheckBox checkD;
-    private CheckBox checkAC;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,11 +38,7 @@ public class numFragment extends Fragment {
         numCorrect=view.findViewById(R.id.correct);
         numA=view.findViewById(R.id.accuracyline);
 
-        checkA=view.findViewById(R.id.A_fragment);
-        checkB=view.findViewById(R.id.B_fragment);
-        checkC=view.findViewById(R.id.C_fragment);
-        checkD=view.findViewById(R.id.D_fragment);
-        checkAC=view.findViewById(R.id.E_fragment);
+
         Button btn_delete = view.findViewById(R.id.delete);
         Button btn_update = view.findViewById(R.id.update);
 

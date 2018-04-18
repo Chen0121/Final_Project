@@ -30,12 +30,53 @@ public class Function extends AppCompatActivity {
     private SQLiteDatabase db;
     private ArrayList<Question> questionArray = new ArrayList<>();
     private Bundle bundle;
+    private Cursor cursor;
+    private String query;
+    private Question Question;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_choice_quiz_creater);
         db = dbHelper.getWritableDatabase();
+        query = "SELECT * FROM " + QuizDatabaseHelper.table_name + ";";
+        cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            if (cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_TYPE)).equals("multipleChoice")) {
+                String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
+                String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
+                String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
+                String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
+                String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+                String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
+                Question = new multipleQuestion(answerA, answerB, answerC, answerD, question, correct);
+
+            } else if (cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_TYPE)).equals("tf")) {
+                String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+                boolean answer = (cursor.getInt(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct)) == 1);
+                Question = new tfQuestion(answer, question);
+
+            } else if (cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_TYPE)).equals("numeric")) {
+                String answerA = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_A));
+                String answerB = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_B));
+                String answerC = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_C));
+                String answerD = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_D));
+                String question = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Question));
+                String correct = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Correct));
+                String accuracy = cursor.getString(cursor.getColumnIndex(QuizDatabaseHelper.KEY_Accuracy));
+                Question = new numQuestion(answerA, answerB, answerC, answerD, question, correct, accuracy);
+            } else {
+                Question = new multipleQuestion("null", "null", "null", "null", "null", "null");
+
+            }
+            questionArray.add(Question);
+            cursor.moveToNext();
+        }
+
+
+
 
         Snackbar.make(findViewById(R.id.one), R.string.ch, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
@@ -88,6 +129,7 @@ public class Function extends AppCompatActivity {
             bundle.putInt("sum",sum );
 
             Intent intent_s=new Intent(Function.this,GetStat.class);
+            intent_s.putExtra("stats",bundle);
             startActivity(intent_s);
         });
 

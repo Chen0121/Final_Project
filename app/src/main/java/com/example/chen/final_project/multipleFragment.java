@@ -13,10 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 public class multipleFragment extends Fragment {
-    private CheckBox checkA;
-    private CheckBox checkB;
-    private CheckBox checkC;
-    private CheckBox checkD;
+
     private EditText textA;
     private EditText textB;
     private EditText textC;
@@ -41,10 +38,7 @@ public class multipleFragment extends Fragment {
         multipleQuestion=view.findViewById(R.id.question_fragment);
         multipleCorrect=view.findViewById(R.id.correct);
 
-        checkA=view.findViewById(R.id.A_fragment);
-        checkB=view.findViewById(R.id.B_fragment);
-        checkC=view.findViewById(R.id.C_fragment);
-        checkD=view.findViewById(R.id.D_fragment);
+
         Button btn_delete = view.findViewById(R.id.delete);
         Button btn_update = view.findViewById(R.id.update);
 
